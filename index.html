@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>🎲 Денежный поток Телепат — ДЕМО</title>
+<title>⚡ P2P Автоматизация — ДЕМО</title>
 <style>
-:root{--bg:#0b1018;--card:#141c28;--line:#39475b;--gold:#f4cf70;--text:#fff;--muted:#9da9b9;--green:#39d98a;--red:#ff647c}
-*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#26334a 0,#0b1018 42%),#0b1018;color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+:root{--bg:#0b1018;--card:#141c28;--line:#39475b;--gold:#f4cf70;--text:#fff;--muted:#9da9b9;--green:#39d98a;--red:#ff647c;--blue:#4f8cff}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#26334a 0,#0b1018 42%),#0b1018;color:var(--text);font-family:Arial,sans-serif;min-height:100vh;overflow-x:hidden}
 .app{max-width:600px;margin:auto;padding:14px 12px 30px}
 h1{text-align:center;color:var(--gold);margin:6px 0 2px;font-size:24px}
 .sub{text-align:center;color:var(--muted);font-size:12px;margin-bottom:14px}
@@ -15,221 +15,200 @@ h1{text-align:center;color:var(--gold);margin:6px 0 2px;font-size:24px}
 .title{color:var(--gold);font-size:13px;font-weight:bold;letter-spacing:.6px;margin-bottom:10px}
 button{width:100%;padding:13px;border-radius:13px;border:0;background:linear-gradient(135deg,#f5d477,#c99629);color:#17120a;font-weight:bold;font-size:15px;cursor:pointer;margin-top:8px}
 button.sec{background:#263345;color:#fff;border:1px solid #4a596d}
-button.dng{background:#542330;color:#fff;border:1px solid #884050}
-button:disabled{opacity:.45;cursor:not-allowed}
+button.ok{background:linear-gradient(135deg,#39d98a,#2ba86a);color:#0d280d}
+button:disabled{opacity:.4;cursor:not-allowed}
 .info{color:var(--muted);font-size:12px;line-height:1.45}
-.ok{color:var(--green)}.er{color:var(--red)}.gold{color:var(--gold)}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.stat{background:#0d1520;border:1px solid #2d3a4c;border-radius:12px;padding:10px}
-.stat b{display:block;font-size:20px;color:#fff;margin-top:2px}
-.stat span{color:#8f9bab;font-size:11px}
-.stat.pos b{color:#39d98a}
-.stat.neg b{color:#ff647c}
-.bar{height:8px;background:#080b10;border-radius:99px;overflow:hidden;margin-top:8px}
-.bar>div{height:100%;background:linear-gradient(90deg,#b98b27,#ffe38a);transition:width .5s}
-.profs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-.prof{background:#0d1520;border:1px solid #2d3a4c;border-radius:12px;padding:10px;cursor:pointer;transition:.15s}
-.prof:hover{border-color:var(--gold)}
-.prof.sel{border-color:var(--gold);background:linear-gradient(145deg,#2a2415,#1a160d);box-shadow:0 0 12px #f4cf7044}
-.prof b{display:block;font-size:13px;color:var(--gold)}
-.prof .prow{font-size:11px;color:#9da9b9;margin-top:3px}
-.prof .prow span{color:#39d98a}.prof .prow .exp{color:#ff647c}
-.board{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:10px}
-.cell{position:relative;background:#0d1520;border:1px solid #2d3a4c;border-radius:10px;padding:8px 4px;text-align:center;font-size:9px;color:#9da9b9;min-height:58px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px}
-.cell .ico{font-size:16px;line-height:1}
-.cell .nm{font-weight:bold;color:#c6cfda;font-size:9px}
-.cell.active{border-color:var(--gold);background:linear-gradient(145deg,#2a2415,#1a160d);box-shadow:0 0 14px #f4cf7066}
-.cell.pawn .ico::after{content:'';display:block;position:absolute;inset:0;box-shadow:0 0 0 2px #39d98a inset;border-radius:10px;animation:pls 1.2s infinite}
-@keyframes pls{0%,100%{opacity:.5}50%{opacity:1}}
-.dice{display:flex;gap:6px;justify-content:center;margin:14px 0 4px;font-size:52px;line-height:1}
-.dice .d{display:inline-block;animation:shake .6s infinite}
-@keyframes shake{0%,100%{transform:rotate(-6deg) scale(1)}25%{transform:rotate(8deg) scale(1.05)}75%{transform:rotate(-8deg) scale(1.05)}}
-.assets{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-.asset{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#0d1520;border:1px solid #2d3a4c;border-radius:12px}
-.asset .nm{font-weight:bold;color:#fff;font-size:13px}
-.asset .ty{font-size:10px;color:#8f9bab;margin-top:2px}
-.asset .val{text-align:right}
-.asset .val .p{color:#39d98a;font-weight:bold;font-size:13px}
-.asset .val .c{color:#8f9bab;font-size:10px}
-.modal{position:fixed;z-index:2000;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:16px}
-.modal.show{display:flex}
-.mod{width:min(420px,100%);background:linear-gradient(145deg,#1d2939,#101721);border:1px solid #68562a;border-radius:20px;padding:20px;text-align:center}
-.mod .ico{font-size:52px;line-height:1}
-.mod h2{margin:8px 0 6px;font-size:20px;color:var(--gold)}
-.mod .desc{color:#cfd8e4;font-size:14px;margin:6px 0 10px;line-height:1.4}
-.mod .meta{background:#0d1520;border:1px solid #2d3a4c;border-radius:12px;padding:10px;margin:10px 0;font-size:12px;text-align:left}
-.mod .meta .dt{display:flex;justify-content:space-between;padding:3px 0}
-.mod .meta .dt span:first-child{color:#8f9bab}
-.mod .meta .dt span:last-child{color:#fff;font-weight:bold}
+.ok{color:var(--green)}.er{color:var(--red)}.gold{color:var(--gold)}.blue{color:var(--blue)}
+.prof{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:linear-gradient(145deg,#272313,#17150e);border:1px solid #66572e;border-radius:14px}
+.prof .l b{font-size:18px;color:var(--gold);display:block}
+.prof .l span{font-size:11px;color:#8f9bab}
+.prof .r{text-align:right}
+.prof .r b{font-size:20px;color:#fff;display:block;line-height:1}
+.prof .r span{font-size:10px;color:#8f9bab}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.stat{background:#0d1520;border:1px solid #2d3a4c;border-radius:12px;padding:10px;text-align:center}
+.stat b{display:block;font-size:20px;color:#fff;margin-top:2px;line-height:1.1}
+.stat span{color:#8f9bab;font-size:10px;letter-spacing:.4px}
+.stat.g b{color:#39d98a}
+.stat.y b{color:#f4cf70}
+.field{display:grid;grid-template-columns:1fr 60px 1fr;gap:8px;margin-top:10px;min-height:380px}
+.col{display:flex;flex-direction:column;gap:6px}
+.col-head{font-size:11px;letter-spacing:.6px;text-align:center;padding:6px 0;border-radius:10px;font-weight:bold}
+.col-head.sell{background:linear-gradient(145deg,#3a1f1f,#200d0d);color:#ff647c;border:1px solid #66302f}
+.col-head.buy{background:linear-gradient(145deg,#1f3a2a,#0d2015);color:#39d98a;border:1px solid #2f6650}
+.order{padding:9px 10px;border-radius:11px;font-size:12px;display:flex;justify-content:space-between;align-items:center;transition:opacity .3s,transform .2s;border:1px solid transparent}
+.order.sell{background:linear-gradient(145deg,#2a1515,#1a0d0d);border-color:#4a2424;color:#ffb3b3}
+.order.buy{background:linear-gradient(145deg,#152a1f,#0d1a13);border-color:#244a34;color:#a8e6b9}
+.order .vol{font-weight:bold}
+.order .fee{font-size:10px;color:#8f9bab}
+.center{display:flex;align-items:center;justify-content:center;position:relative}
+.center .core{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#f5d477,#c99629);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 24px #f4cf7088;transition:transform .3s}
+.center .core.pulse{animation:pulse .5s}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.35)}100%{transform:scale(1)}}
+.float-fee{position:fixed;font-weight:bold;color:#39d98a;font-size:18px;pointer-events:none;animation:floatUp 1s ease-out forwards;text-shadow:0 0 12px #39d98a88;z-index:2000}
+@keyframes floatUp{0%{opacity:0;transform:translateY(0) scale(.7)}20%{opacity:1;transform:translateY(-8px) scale(1.1)}100%{opacity:0;transform:translateY(-60px) scale(1)}}
+.empty{color:#4a596d;text-align:center;font-size:11px;padding:20px 6px}
+.log{display:flex;flex-direction:column;gap:3px;max-height:130px;overflow-y:auto;font-size:11px}
+.log .line{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #1a2534}
+.log .line:last-child{border:0}
+.log .tm{color:#7f8c9f}
 .toast{position:fixed;left:12px;right:12px;top:12px;z-index:4000;padding:12px;border-radius:12px;background:#1b2737;border:1px solid #4c5b70;text-align:center;font-size:13px;display:none}
 .toast.show{display:block;animation:fadeIn .25s}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.win{background:linear-gradient(145deg,#1f4a1f,#0d280d);border-color:#39d98a !important}
-.lose{background:linear-gradient(145deg,#3a1f1f,#200d0d);border-color:#ff647c !important}
-.row{display:flex;gap:8px}.row>*{flex:1}
-.legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:10px;color:#8f9bab;margin-top:8px}
-.legend span{background:#0d1520;border:1px solid #2d3a4c;padding:3px 8px;border-radius:99px}
+.flash{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0;transition:opacity .2s}
+.flash.on{opacity:.15}
+.flash.green{background:#39d98a}
 </style>
 </head>
 <body>
+<div id="flash" class="flash"></div>
 <div id="toast" class="toast"></div>
+
 <div class="app">
-<h1>🎲 ДЕНЕЖНЫЙ ПОТОК</h1>
-<div class="sub">ДЕМО • Телепат • играй без риска</div>
+<h1>⚡ P2P АВТОМАТИЗАЦИЯ</h1>
+<div class="sub">ДЕМО • Телепат</div>
 
-<!-- ЭКРАН ВЫБОРА ПРОФЕССИИ -->
-<section id="s-start">
-  <div class="card gold">
-    <div class="title">👤 ВЫБЕРИ ПРОФЕССИЮ</div>
-    <div class="info">Зарплата приходит каждый круг, расходы списываются каждый круг. Разница — твой денежный поток.</div>
-    <div class="profs" id="profList"></div>
-    <button id="startBtn" disabled onclick="startGame()">🚀 НАЧАТЬ ИГРУ</button>
-  </div>
-  <div class="card">
-    <div class="title">🎯 ЦЕЛЬ ИГРЫ</div>
-    <div class="info">Пассивный доход (от активов) ≥ расходов. Тогда ты выходишь из «крысиных бегов» и побеждаешь. Покупай возможности, копи TUSD, избегай лишних трат.</div>
-  </div>
-</section>
-
-<!-- ИГРОВОЙ ЭКРАН -->
-<section id="s-game" style="display:none">
-  <div class="card gold">
-    <div class="title">📊 ТВОЙ ФИНАНСОВЫЙ ПОТОК</div>
-    <div class="stats">
-      <div class="stat"><span>💰 НАЛИЧНЫЕ</span><b id="sCash">0</b></div>
-      <div class="stat pos"><span>💼 ЗАРПЛАТА / круг</span><b id="sSalary">0</b></div>
-      <div class="stat pos"><span>📈 ПАССИВ / круг</span><b id="sPassive">0</b></div>
-      <div class="stat neg"><span>💸 РАСХОДЫ / круг</span><b id="sExpenses">0</b></div>
+<div class="card gold">
+  <div class="title">👤 ТВОЙ ПРОФИЛЬ</div>
+  <div class="prof">
+    <div class="l">
+      <b id="pName">Крестьянин</b>
+      <span id="pLevel">Уровень 1 из 21</span>
     </div>
-    <div class="info" style="margin-top:10px">Прогресс к победе</div>
-    <div class="bar"><div id="sBar" style="width:0%"></div></div>
-    <div class="info" style="margin-top:6px" id="sProgress">Пассив 0 / Расходы 0</div>
-  </div>
-
-  <div class="card">
-    <div class="title">🎲 БРОСОК КУБИКА</div>
-    <div class="dice" id="diceBox"><span class="d">🎲</span></div>
-    <button id="rollBtn" onclick="rollDice()">🎲 БРОСИТЬ КУБИК</button>
-    <div class="info" style="text-align:center;margin-top:8px" id="turnInfo">Круг 1 • Ход 1</div>
-  </div>
-
-  <div class="card">
-    <div class="title">🗺️ ПОЛЕ</div>
-    <div class="board" id="board"></div>
-    <div class="legend">
-      <span>💼 Возможность</span><span>⚡ Событие</span><span>💰 Зарплата</span><span>📈 Рынок</span><span>🏁 Старт</span>
+    <div class="r">
+      <b id="pRate">1.0%</b>
+      <span>ставка за сделку</span>
     </div>
   </div>
-
-  <div class="card">
-    <div class="title">💼 МОИ АКТИВЫ</div>
-    <div id="assetsList" class="assets"><div class="info">Пока пусто — покупай возможности на поле.</div></div>
+  <div class="info" style="text-align:center;margin-top:10px">
+    🎯 Лимит: <b id="pLimit" style="color:#f4cf70">10</b> сделок / сутки
   </div>
-
-  <div class="card">
-    <div class="title">📜 ЖУРНАЛ</div>
-    <div id="logList" class="info" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px"></div>
+  <div class="info" style="text-align:center;margin-top:4px">
+    📦 Объём ордера: от <b style="color:#fff">1</b> до <b id="pMaxOrder" style="color:#4f8cff">10</b> $
   </div>
-
-  <div class="row">
-    <button class="sec" onclick="resetGame()">🔄 Заново</button>
-  </div>
-</section>
 </div>
 
-<!-- МОДАЛКА СОБЫТИЯ / ВОЗМОЖНОСТИ -->
-<div id="modal" class="modal">
-  <div class="mod" id="modalBody"></div>
+<div class="card">
+  <div class="title">📊 ТЕКУЩАЯ СЕССИЯ</div>
+  <div class="stats">
+    <div class="stat"><span>СДЕЛАНО</span><b id="sDone">0</b></div>
+    <div class="stat g"><span>ЗАРАБОТАНО</span><b id="sEarned">0.00</b></div>
+    <div class="stat y"><span>ОСТАЛОСЬ</span><b id="sLeft">10</b></div>
+  </div>
+  <div id="sHint" class="info" style="text-align:center;margin-top:10px">Нажми «СТАРТ» — начнём автоматические сделки</div>
+</div>
+
+<div class="card">
+  <div class="title">🔄 ОЧЕРЕДЬ ОРДЕРОВ</div>
+  <div class="field">
+    <div class="col">
+      <div class="col-head sell">SELL</div>
+      <div id="sellQueue"></div>
+    </div>
+    <div class="center"><div class="core" id="core">⚡</div></div>
+    <div class="col">
+      <div class="col-head buy">BUY</div>
+      <div id="buyQueue"></div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="display:flex;gap:8px">
+  <button id="btnStart" class="ok" onclick="startAuto()">🎬 СТАРТ</button>
+  <button id="btnOne" class="sec" onclick="oneDeal()">⚡ ОДНА</button>
+</div>
+<div class="row" style="display:flex;gap:8px">
+  <button class="sec" onclick="reset()">🔄 СБРОС</button>
+  <button class="sec" onclick="levelUp()">⬆️ +1 УРОВЕНЬ</button>
+</div>
+<div class="row" style="display:flex;gap:8px">
+  <button class="sec" onclick="levelDown()">⬇️ -1 УРОВЕНЬ</button>
+</div>
+
+<div class="card">
+  <div class="title">📜 ЖУРНАЛ СДЕЛОК</div>
+  <div id="logList" class="log"><div class="info">Пока пусто</div></div>
+</div>
 </div>
 
 <script>
-/* ================== ДАННЫЕ ================== */
-const PROFESSIONS = [
-  {id:'courier',   ico:'🚴', name:'Курьер',        salary:15, expenses:12},
-  {id:'waiter',    ico:'🧑‍🍳', name:'Официант',     salary:20, expenses:14},
-  {id:'engineer',  ico:'💻', name:'Программист',   salary:40, expenses:24},
-  {id:'doctor',    ico:'🩺', name:'Врач',          salary:55, expenses:32},
-  {id:'lawyer',    ico:'⚖️', name:'Юрист',         salary:70, expenses:42},
-  {id:'business',  ico:'💼', name:'Бизнесмен',     salary:100, expenses:60},
+/* ======================= ДАННЫЕ ======================= */
+const RANKS = ['Крестьянин','Вольный','Гражданин','Оруженосец','Мечник','Десятник','Сотник','Тысячник','Рыцарь','Железный рыцарь','Бронзовый рыцарь','Серебряный рыцарь','Золотой рыцарь','Барон','Виконт','Граф','Маркиз','Герцог','Князь','Король','Император'];
+
+/* Максимальный объём ордера по уровням — растёт ×1.8 каждый уровень.
+   До 4-го уровня — точно твои числа (10, 23, 44, 80), дальше экстраполяция. */
+const MAX_ORDER = [
+  10,          // 1  Крестьянин
+  23,          // 2  Вольный
+  44,          // 3  Гражданин
+  80,          // 4  Оруженосец
+  145,         // 5  Мечник
+  265,         // 6  Десятник
+  480,         // 7  Сотник
+  870,         // 8  Тысячник
+  1580,        // 9  Рыцарь
+  2870,        // 10 Железный рыцарь
+  5200,        // 11 Бронзовый рыцарь
+  9450,        // 12 Серебряный рыцарь
+  17200,       // 13 Золотой рыцарь
+  31200,       // 14 Барон
+  56700,       // 15 Виконт
+  103000,      // 16 Граф
+  187000,      // 17 Маркиз
+  340000,      // 18 Герцог
+  618000,      // 19 Князь
+  1123000,     // 20 Король
+  2040000      // 21 Император
 ];
 
-const BOARD = [
-  {t:'start',     ico:'🏁', nm:'Старт'},
-  {t:'opp',       ico:'💼', nm:'Возможность'},
-  {t:'event',     ico:'⚡', nm:'Событие'},
-  {t:'salary',    ico:'💰', nm:'Зарплата'},
-  {t:'opp',       ico:'💼', nm:'Возможность'},
-  {t:'market',    ico:'📈', nm:'Рынок'},
-  {t:'event',     ico:'⚡', nm:'Событие'},
-  {t:'opp',       ico:'💼', nm:'Возможность'},
-  {t:'salary',    ico:'💰', nm:'Зарплата'},
-  {t:'event',     ico:'⚡', nm:'Событие'},
-  {t:'opp',       ico:'💼', nm:'Возможность'},
-  {t:'event',     ico:'⚡', nm:'Событие'},
-];
+/* ======================= СОСТОЯНИЕ ======================= */
+let S = {
+  level: 1,
+  done: 0,
+  earned: 0,
+  log: [],
+  running: false,
+  sells: [],
+  buys: [],
+};
 
-const OPPORTUNITIES = [
-  {id:'stk_tp',  ico:'📊', nm:'Акции «Telepat»',  cost:20,  passive:0,  type:'Акция'},
-  {id:'stk_ai',  ico:'🤖', nm:'Акции «AI Corp»',  cost:35,  passive:1,  type:'Акция'},
-  {id:'bond',    ico:'📜', nm:'Облигация',         cost:30,  passive:3,  type:'Облигация'},
-  {id:'coffee',  ico:'☕', nm:'Кофейня',           cost:60,  passive:7,  type:'Бизнес'},
-  {id:'shop',    ico:'🏪', nm:'Магазин',           cost:90,  passive:11, type:'Бизнес'},
-  {id:'wash',    ico:'🚗', nm:'Автомойка',         cost:110, passive:14, type:'Бизнес'},
-  {id:'flat',    ico:'🏠', nm:'Квартира (аренда)', cost:160, passive:18, type:'Недвижимость'},
-  {id:'startup', ico:'🚀', nm:'IT-стартап',        cost:220, passive:30, type:'Бизнес'},
-  {id:'villa',   ico:'🏝️', nm:'Вилла у моря',      cost:300, passive:38, type:'Недвижимость'},
-];
-
-const EVENTS = [
-  {ico:'🎁', nm:'Премия на работе',    delta:+15},
-  {ico:'🚗', nm:'Штраф ГИБДД',          delta:-10},
-  {ico:'📱', nm:'Разбил телефон',       delta:-8},
-  {ico:'🏥', nm:'Заболел, врач',        delta:-12},
-  {ico:'🎰', nm:'Выиграл в лотерею',    delta:+40},
-  {ico:'💡', nm:'Ремонт в квартире',    delta:-18},
-  {ico:'👴', nm:'Наследство от бабушки', delta:+60},
-  {ico:'🦷', nm:'Зубной, неожиданно',   delta:-14},
-  {ico:'💸', nm:'Друг вернул долг',     delta:+25},
-  {ico:'🚨', nm:'Авария, ремонт',       delta:-30},
-  {ico:'📚', nm:'Курс повышения',       delta:-20},
-  {ico:'🏆', nm:'Бонус за проект',      delta:+35},
-];
-
-/* ================== СОСТОЯНИЕ ================== */
-let G = null;
-
-function newGame(prof){
-  return {
-    prof,
-    cash: 30,
-    position: 0,
-    round: 1,
-    turn: 1,
-    salary: prof.salary,
-    expenses: prof.expenses,
-    passive: 0,
-    assets: [],       // {id, ico, nm, cost, passive, type}
-    log: [],
-    won: false,
-    lost: false,
-  };
+/* ======================= ФОРМУЛЫ ======================= */
+function limitOf(lvl){ return 9 + lvl; }
+function rateOf(lvl){ return (9 + lvl) / 10; }
+function maxOrderOf(lvl){ return MAX_ORDER[Math.min(20, Math.max(0, lvl - 1))]; }
+function fmt(v, d=2){ return Number(v).toFixed(d); }
+function rndVol(lvl){
+  const max = maxOrderOf(lvl);
+  // Случайное число от 1 до max
+  return 1 + Math.floor(Math.random() * max);
+}
+/* Красивое форматирование больших чисел */
+function fmtBig(v){
+  const n = Number(v);
+  if(n >= 1e6) return (n/1e6).toFixed(2).replace(/\.00$/,'') + 'M';
+  if(n >= 1e3) return (n/1e3).toFixed(1).replace(/\.0$/,'') + 'K';
+  return String(Math.floor(n));
 }
 
-/* ================== УТИЛИТЫ ================== */
+/* ======================= СОХРАНЕНИЕ ======================= */
 function save(){
-  try{ localStorage.setItem('tp_flow_game', JSON.stringify(G)); }catch(e){}
+  try{ localStorage.setItem('tp_p2p_demo_v2', JSON.stringify({
+    level:S.level, done:S.done, earned:S.earned, log:S.log.slice(0,20)
+  })); }catch(e){}
 }
 function load(){
   try{
-    const s = localStorage.getItem('tp_flow_game');
-    if(!s) return null;
-    const g = JSON.parse(s);
-    if(!g || !g.prof) return null;
-    g.prof = PROFESSIONS.find(p=>p.id===g.prof.id) || PROFESSIONS[0];
-    return g;
-  }catch{ return null; }
+    const s = localStorage.getItem('tp_p2p_demo_v2') || localStorage.getItem('tp_p2p_demo');
+    if(!s) return;
+    const d = JSON.parse(s);
+    if(d && typeof d.level === 'number'){
+      S.level = Math.min(21, Math.max(1, d.level));
+      S.done = d.done||0;
+      S.earned = d.earned||0;
+      S.log = d.log||[];
+    }
+  }catch(e){}
 }
-function clear(){ try{ localStorage.removeItem('tp_flow_game'); }catch(e){} }
 
 function toast(t, ok=false){
   const el = document.getElementById('toast');
@@ -237,342 +216,211 @@ function toast(t, ok=false){
   el.style.borderColor = ok ? '#397b5b' : '#4c5b70';
   el.classList.add('show');
   clearTimeout(el._t);
-  el._t = setTimeout(()=>el.classList.remove('show'), 2200);
-}
-function f(v){ return Number(v||0).toLocaleString('ru-RU'); }
-function log(txt){
-  G.log.unshift({t:new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}), txt});
-  if(G.log.length > 30) G.log.length = 30;
+  el._t = setTimeout(()=>el.classList.remove('show'), 2000);
 }
 
-/* ================== СТАРТ ================== */
-function renderProfList(){
-  const box = document.getElementById('profList');
-  box.innerHTML = PROFESSIONS.map(p => `
-    <div class="prof" data-id="${p.id}">
-      <b>${p.ico} ${p.name}</b>
-      <div class="prow">💰 <span>+${p.salary}</span> / круг</div>
-      <div class="prow">💸 <span class="exp">-${p.expenses}</span> / круг</div>
-      <div class="prow" style="color:#f4cf70">📊 Поток: +${p.salary - p.expenses}</div>
-    </div>`).join('');
-  box.querySelectorAll('.prof').forEach(el => {
-    el.onclick = () => {
-      box.querySelectorAll('.prof').forEach(x => x.classList.remove('sel'));
-      el.classList.add('sel');
-      window._selProf = PROFESSIONS.find(p => p.id === el.dataset.id);
-      document.getElementById('startBtn').disabled = false;
-    };
-  });
+function flash(color='green'){
+  const f = document.getElementById('flash');
+  f.className = 'flash ' + color + ' on';
+  setTimeout(()=>f.classList.remove('on'), 150);
 }
 
-function startGame(){
-  if(!window._selProf) return;
-  G = newGame(window._selProf);
-  log(`🚀 Начал игру как ${G.prof.name}`);
+function pushLog(txt){
+  const time = new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+  S.log.unshift({t:time, txt});
+  if(S.log.length > 20) S.log.length = 20;
+  renderLog();
   save();
-  renderAll();
-  document.getElementById('s-start').style.display = 'none';
-  document.getElementById('s-game').style.display = 'block';
 }
 
-function resetGame(){
-  if(!confirm('Начать заново? Прогресс пропадёт.')) return;
-  clear();
-  G = null;
-  document.getElementById('s-start').style.display = 'block';
-  document.getElementById('s-game').style.display = 'none';
-  document.getElementById('startBtn').disabled = true;
-  document.querySelectorAll('.prof').forEach(x => x.classList.remove('sel'));
-  window._selProf = null;
+/* ======================= РЕНДЕР ======================= */
+function renderTop(){
+  const lvl = S.level;
+  document.getElementById('pName').textContent = RANKS[lvl-1];
+  document.getElementById('pLevel').textContent = `Уровень ${lvl} из 21`;
+  document.getElementById('pRate').textContent = rateOf(lvl).toFixed(1) + '%';
+  document.getElementById('pLimit').textContent = limitOf(lvl);
+  document.getElementById('pMaxOrder').textContent = fmtBig(maxOrderOf(lvl));
+
+  document.getElementById('sDone').textContent = S.done;
+  document.getElementById('sEarned').textContent = fmt(S.earned, 2);
+  document.getElementById('sLeft').textContent = Math.max(0, limitOf(lvl) - S.done);
+
+  const full = S.done >= limitOf(lvl);
+  document.getElementById('btnStart').disabled = full || S.running || !S.sells.length;
+  document.getElementById('btnOne').disabled = full || S.running || !S.sells.length;
 }
 
-/* ================== РЕНДЕР ================== */
-function renderAll(){
-  if(!G) return;
-  document.getElementById('sCash').textContent = f(G.cash) + ' T';
-  document.getElementById('sSalary').textContent = f(G.salary) + ' T';
-  document.getElementById('sPassive').textContent = f(G.passive) + ' T';
-  document.getElementById('sExpenses').textContent = f(G.expenses) + ' T';
-  const pct = Math.min(100, (G.passive / G.expenses) * 100);
-  document.getElementById('sBar').style.width = pct + '%';
-  document.getElementById('sProgress').textContent = `Пассив ${f(G.passive)} / Расходы ${f(G.expenses)} TUSD`;
-  document.getElementById('turnInfo').textContent = `Круг ${G.round} • Ход ${G.turn}`;
+function renderQueues(){
+  const sq = document.getElementById('sellQueue');
+  const bq = document.getElementById('buyQueue');
 
-  // Поле
-  const board = document.getElementById('board');
-  board.innerHTML = BOARD.map((c,i)=>`
-    <div class="cell ${i===G.position?'active':''} ${i===G.position?'pawn':''}">
-      <div class="ico">${i===G.position ? (G.prof?.ico || '🧍') : c.ico}</div>
-      <div class="nm">${c.nm}</div>
-    </div>`).join('');
-
-  // Активы
-  const al = document.getElementById('assetsList');
-  if(!G.assets.length){
-    al.innerHTML = '<div class="info">Пока пусто — покупай возможности на поле.</div>';
-  }else{
-    al.innerHTML = G.assets.map(a=>`
-      <div class="asset">
+  if(!S.sells.length){
+    sq.innerHTML = '<div class="empty">Очередь пуста</div>';
+  } else {
+    sq.innerHTML = S.sells.map(o => `
+      <div class="order sell" data-id="${o.id}">
         <div>
-          <div class="nm">${a.ico} ${a.nm}</div>
-          <div class="ty">${a.type} • куплено за ${a.cost} T</div>
-        </div>
-        <div class="val">
-          <div class="p">+${a.passive} T/круг</div>
-          <div class="c">пассив</div>
+          <div class="vol">${fmtBig(o.vol)} $</div>
+          <div class="fee">🔻 продажа</div>
         </div>
       </div>`).join('');
   }
 
-  // Журнал
+  if(!S.buys.length){
+    bq.innerHTML = '<div class="empty">Очередь пуста</div>';
+  } else {
+    bq.innerHTML = S.buys.map(o => `
+      <div class="order buy" data-id="${o.id}">
+        <div>
+          <div class="vol">${fmtBig(o.vol)} $</div>
+          <div class="fee">🔺 покупка</div>
+        </div>
+      </div>`).join('');
+  }
+}
+
+function renderLog(){
   const ll = document.getElementById('logList');
-  ll.innerHTML = G.log.length
-    ? G.log.map(x => `<div><span style="color:#7f8c9f">[${x.t}]</span> ${x.txt}</div>`).join('')
-    : '<div>История пуста</div>';
+  if(!S.log.length){ ll.innerHTML = '<div class="info">Пока пусто</div>'; return; }
+  ll.innerHTML = S.log.map(l => `
+    <div class="line">
+      <span class="tm">[${l.t}]</span>
+      <span style="flex:1;text-align:right">${l.txt}</span>
+    </div>`).join('');
+}
+
+function renderAll(){ renderTop(); renderQueues(); renderLog(); }
+
+/* ======================= СЕССИЯ ======================= */
+function newSession(){
+  const n = limitOf(S.level);
+  S.sells = Array.from({length:n}, (_,i)=>({ id:'s'+Date.now()+'_'+i, vol: rndVol(S.level) }));
+  S.buys  = Array.from({length:n}, (_,i)=>({ id:'b'+Date.now()+'_'+i, vol: rndVol(S.level) }));
+  S.done = 0;
+  S.earned = 0;
+  S.running = false;
+  renderAll();
+}
+
+/* ======================= ОДНА СДЕЛКА ======================= */
+async function oneDeal(){
+  if(S.running) return;
+  if(S.done >= limitOf(S.level)){ toast('Лимит на сегодня исчерпан'); return; }
+  if(!S.sells.length || !S.buys.length){ toast('Ордера закончились'); return; }
+
+  S.running = true;
+  renderTop();
+
+  const sellEl = document.querySelector('#sellQueue .order');
+  const buyEl  = document.querySelector('#buyQueue .order');
+  if(!sellEl || !buyEl){ S.running = false; return; }
+
+  const coreEl = document.getElementById('core');
+  const sellRect = sellEl.getBoundingClientRect();
+  const buyRect  = buyEl.getBoundingClientRect();
+  const coreRect = coreEl.getBoundingClientRect();
+  const cx = coreRect.left + coreRect.width/2;
+  const cy = coreRect.top + coreRect.height/2;
+
+  const cloneStyle = r => `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px;z-index:1000;margin:0;transition:all .55s cubic-bezier(.4,0,.2,1);pointer-events:none`;
+  const sc = sellEl.cloneNode(true); sc.style.cssText = cloneStyle(sellRect);
+  const bc = buyEl.cloneNode(true);  bc.style.cssText = cloneStyle(buyRect);
+  document.body.appendChild(sc); document.body.appendChild(bc);
+  sellEl.style.opacity = '0';
+  buyEl.style.opacity  = '0';
+
+  await new Promise(r=>setTimeout(r, 20));
+  sc.style.left = (cx - sellRect.width - 4) + 'px';
+  sc.style.top  = (cy - sellRect.height/2) + 'px';
+  bc.style.left = (cx + 4) + 'px';
+  bc.style.top  = (cy - buyRect.height/2) + 'px';
+
+  await new Promise(r=>setTimeout(r, 560));
+
+  const sellVol = S.sells[0].vol;
+  const buyVol  = S.buys[0].vol;
+  const vol = Math.min(sellVol, buyVol);
+  const fee = +(vol * rateOf(S.level) / 100).toFixed(4);
+
+  sc.remove(); bc.remove();
+  sellEl.remove(); buyEl.remove();
+  S.sells.shift(); S.buys.shift();
+
+  flash('green');
+  coreEl.classList.add('pulse');
+  setTimeout(()=>coreEl.classList.remove('pulse'), 500);
+
+  const feeEl = document.createElement('div');
+  feeEl.className = 'float-fee';
+  feeEl.textContent = '+' + fee.toFixed(4) + ' T';
+  feeEl.style.left = (cx - 40) + 'px';
+  feeEl.style.top  = (cy - 12) + 'px';
+  document.body.appendChild(feeEl);
+  setTimeout(()=>feeEl.remove(), 1000);
+
+  S.earned += fee;
+  S.done += 1;
+  pushLog(`💥 ${fmtBig(vol)} $ × ${rateOf(S.level).toFixed(1)}% = +${fee.toFixed(4)} T`);
+
+  await new Promise(r=>setTimeout(r, 420));
+
+  renderAll();
+  S.running = false;
+  renderTop();
+
+  if(S.done >= limitOf(S.level)){
+    toast(`✅ Лимит исчерпан. Итого: +${S.earned.toFixed(4)} T`, true);
+  } else if(!S.sells.length){
+    toast('📭 Очередь пуста');
+  }
+}
+
+/* ======================= АВТО ======================= */
+async function startAuto(){
+  if(S.running) return;
+  const left = limitOf(S.level) - S.done;
+  if(left <= 0){ toast('Лимит исчерпан'); return; }
+  if(!S.sells.length){ toast('Нет ордеров — сбрось сессию'); return; }
+
+  for(let i=0; i<left; i++){
+    if(!S.sells.length || !S.buys.length) break;
+    await oneDeal();
+  }
+}
+
+/* ======================= УПРАВЛЕНИЕ ======================= */
+function reset(){
+  if(S.running) return;
+  newSession();
+  toast('🔄 Новая сессия', true);
+  pushLog('🔄 Сессия перезапущена');
+}
+
+function levelUp(){
+  if(S.running) return;
+  if(S.level >= 21){ toast('Максимальный уровень'); return; }
+  S.level++;
+  pushLog(`⬆️ Уровень ${S.level} — ${RANKS[S.level-1]}`);
+  newSession();
   save();
 }
 
-/* ================== КУБИК ================== */
-const DICE_FACES = ['⚀','⚁','⚂','⚃','⚄','⚅'];
-let rolling = false;
-
-function rollDice(){
-  if(rolling || !G || G.won) return;
-  rolling = true;
-  document.getElementById('rollBtn').disabled = true;
-
-  const box = document.getElementById('diceBox');
-  let ticks = 0;
-  const spin = setInterval(()=>{
-    box.innerHTML = `<span class="d">${DICE_FACES[Math.floor(Math.random()*6)]}</span>`;
-    ticks++;
-    if(ticks > 12){
-      clearInterval(spin);
-      const n = 1 + Math.floor(Math.random()*6);
-      box.innerHTML = `<span class="d">${DICE_FACES[n-1]}</span>`;
-      setTimeout(()=>movePlayer(n), 200);
-    }
-  }, 70);
+function levelDown(){
+  if(S.running) return;
+  if(S.level <= 1){ toast('Минимальный уровень'); return; }
+  S.level--;
+  pushLog(`⬇️ Уровень ${S.level} — ${RANKS[S.level-1]}`);
+  newSession();
+  save();
 }
 
-function movePlayer(steps){
-  G.turn++;
-  for(let i=0;i<steps;i++){
-    G.position = (G.position + 1) % BOARD.length;
-    if(G.position === 0){
-      // Прошли круг → зарплата + расходы
-      G.cash += G.salary - G.expenses;
-      G.round++;
-      log(`💰 Зарплата +${G.salary} T, расходы -${G.expenses} T (круг ${G.round-1})`);
-    }
-  }
-  renderAll();
-  setTimeout(()=>handleCell(BOARD[G.position]), 250);
-}
-
-/* ================== КЛЕТКИ ================== */
-function handleCell(cell){
-  rolling = false;
-  switch(cell.t){
-    case 'start':     openStart();     break;
-    case 'salary':    openSalary();    break;
-    case 'opp':       openOpportunity(); break;
-    case 'event':     openEvent();     break;
-    case 'market':    openMarket();    break;
-  }
-}
-
-function closeModal(){
-  document.getElementById('modal').classList.remove('show');
-  document.getElementById('rollBtn').disabled = false;
-  checkWinLose();
-  renderAll();
-}
-
-function checkWinLose(){
-  if(G.won || G.lost) return;
-  if(G.passive >= G.expenses && G.passive > 0){
-    G.won = true;
-    log('🏆 ПОБЕДА! Пассивный доход превысил расходы');
-    showEnd(true);
-  }else if(G.cash < 0){
-    G.lost = true;
-    log('💀 Провал — минусовой баланс');
-    showEnd(false);
-  }
-}
-
-function showEnd(win){
-  const m = document.getElementById('modal');
-  const b = document.getElementById('modalBody');
-  b.className = 'mod ' + (win ? 'win' : 'lose');
-  b.innerHTML = `
-    <div class="ico">${win ? '🏆' : '💀'}</div>
-    <h2>${win ? 'ПОБЕДА!' : 'ИГРА ОКОНЧЕНА'}</h2>
-    <div class="desc">${win
-      ? `Ты вышел из «крысиных бегов»! Пассив: <b>${G.passive} T</b> ≥ расходов <b>${G.expenses} T</b>.`
-      : `Наличные ушли в минус. Попробуй снова!`}</div>
-    <div class="meta">
-      <div class="dt"><span>Профессия</span><span>${G.prof.ico} ${G.prof.name}</span></div>
-      <div class="dt"><span>Кругов пройдено</span><span>${G.round}</span></div>
-      <div class="dt"><span>Наличные</span><span>${f(G.cash)} T</span></div>
-      <div class="dt"><span>Пассив/расходы</span><span>${f(G.passive)} / ${f(G.expenses)} T</span></div>
-      <div class="dt"><span>Активов куплено</span><span>${G.assets.length}</span></div>
-    </div>
-    <button onclick="closeModal();resetGame()">🔄 Играть заново</button>
-    <button class="sec" onclick="closeModal()">Закрыть</button>`;
-  m.classList.add('show');
-}
-
-function openStart(){
-  const b = document.getElementById('modalBody');
-  b.className = 'mod';
-  b.innerHTML = `
-    <div class="ico">🏁</div>
-    <h2>Старт</h2>
-    <div class="desc">Ты на старте. Прошёл круг — получил зарплату, оплатил расходы.</div>
-    <button onclick="closeModal()">Продолжить</button>`;
-  document.getElementById('modal').classList.add('show');
-}
-
-function openSalary(){
-  const net = G.salary - G.expenses;
-  const b = document.getElementById('modalBody');
-  b.className = 'mod';
-  b.innerHTML = `
-    <div class="ico">💰</div>
-    <h2>Зарплата</h2>
-    <div class="desc">Ты получил зарплату и оплатил расходы этого круга.</div>
-    <div class="meta">
-      <div class="dt"><span>Зарплата</span><span style="color:#39d98a">+${G.salary} T</span></div>
-      <div class="dt"><span>Расходы</span><span style="color:#ff647c">-${G.expenses} T</span></div>
-      <div class="dt"><span>Чистыми</span><span>${net>=0?'+':''}${net} T</span></div>
-    </div>
-    <button onclick="closeModal()">Отлично</button>`;
-  document.getElementById('modal').classList.add('show');
-  // Начислим сразу (бонус за клетку)
-  G.cash += net;
-  log(`💰 Бонус зарплаты: ${net>=0?'+':''}${net} T`);
-}
-
-function openEvent(){
-  const e = EVENTS[Math.floor(Math.random()*EVENTS.length)];
-  G.cash += e.delta;
-  log(`${e.ico} ${e.nm}: ${e.delta>0?'+':''}${e.delta} T`);
-  const b = document.getElementById('modalBody');
-  b.className = 'mod ' + (e.delta>0?'win':'lose');
-  b.innerHTML = `
-    <div class="ico">${e.ico}</div>
-    <h2>${e.nm}</h2>
-    <div class="desc">Случайное событие.</div>
-    <div class="meta">
-      <div class="dt"><span>Изменение</span><span style="color:${e.delta>0?'#39d98a':'#ff647c'}">${e.delta>0?'+':''}${e.delta} TUSD</span></div>
-      <div class="dt"><span>Наличные</span><span>${f(G.cash)} T</span></div>
-    </div>
-    <button onclick="closeModal()">Ок</button>`;
-  document.getElementById('modal').classList.add('show');
-}
-
-function openOpportunity(){
-  // Случайная возможность
-  const pool = OPPORTUNITIES.filter(o => !G.assets.find(a => a.id === o.id));
-  if(!pool.length){
-    const b = document.getElementById('modalBody');
-    b.className = 'mod';
-    b.innerHTML = `
-      <div class="ico">💼</div>
-      <h2>Возможность</h2>
-      <div class="desc">Хороших предложений сегодня нет — все активы уже твои.</div>
-      <button onclick="closeModal()">Ок</button>`;
-    document.getElementById('modal').classList.add('show');
-    return;
-  }
-  const o = pool[Math.floor(Math.random()*pool.length)];
-  const can = G.cash >= o.cost;
-  const b = document.getElementById('modalBody');
-  b.className = 'mod' + (o.passive >= 15 ? ' win' : '');
-  b.innerHTML = `
-    <div class="ico">${o.ico}</div>
-    <h2>${o.nm}</h2>
-    <div class="desc">${o.type}. Приносит пассивный доход каждый круг.</div>
-    <div class="meta">
-      <div class="dt"><span>Стоимость</span><span>${o.cost} TUSD</span></div>
-      <div class="dt"><span>Пассивный доход</span><span style="color:#39d98a">+${o.passive} T/круг</span></div>
-      <div class="dt"><span>Окупаемость</span><span>${o.passive>0 ? Math.ceil(o.cost/o.passive)+' кругов' : '—'}</span></div>
-      <div class="dt"><span>Твои наличные</span><span>${f(G.cash)} T</span></div>
-    </div>
-    <button onclick="buyOpp('${o.id}')" ${can?'':'disabled'}>${can?'✅ КУПИТЬ':'❌ Мало денег'}</button>
-    <button class="sec" onclick="skipOpp()">Пропустить</button>`;
-  document.getElementById('modal').classList.add('show');
-  window._opp = o;
-}
-
-function buyOpp(id){
-  const o = window._opp;
-  if(!o || G.cash < o.cost) return;
-  G.cash -= o.cost;
-  G.passive += o.passive;
-  G.assets.push({...o});
-  log(`💼 Куплено: ${o.ico} ${o.nm} за ${o.cost} T (+${o.passive} T/круг)`);
-  toast(`✅ Куплено: ${o.nm}`, true);
-  closeModal();
-}
-function skipOpp(){
-  log('💼 Возможность пропущена');
-  closeModal();
-}
-
-function openMarket(){
-  // Предложение продать случайный актив за 1.2× его цены
-  if(!G.assets.length){
-    const b = document.getElementById('modalBody');
-    b.className='mod';
-    b.innerHTML = `<div class="ico">📈</div><h2>Рынок</h2>
-      <div class="desc">У тебя нет активов для продажи. Покупай возможности!</div>
-      <button onclick="closeModal()">Ок</button>`;
-    document.getElementById('modal').classList.add('show');
-    return;
-  }
-  const a = G.assets[Math.floor(Math.random()*G.assets.length)];
-  const price = Math.floor(a.cost * 1.25);
-  const b = document.getElementById('modalBody');
-  b.className='mod win';
-  b.innerHTML = `
-    <div class="ico">📈</div>
-    <h2>Хорошее предложение!</h2>
-    <div class="desc">Покупатель готов выкупить твой актив с наценкой 25%.</div>
-    <div class="meta">
-      <div class="dt"><span>Актив</span><span>${a.ico} ${a.nm}</span></div>
-      <div class="dt"><span>Куплен за</span><span>${a.cost} T</span></div>
-      <div class="dt"><span>Предложение</span><span style="color:#39d98a">${price} T</span></div>
-      <div class="dt"><span>Профит</span><span style="color:#39d98a">+${price-a.cost} T</span></div>
-    </div>
-    <button onclick="sellAsset('${a.id}',${price})">💰 Продать за ${price} T</button>
-    <button class="sec" onclick="closeModal()">Отказаться</button>`;
-  document.getElementById('modal').classList.add('show');
-}
-function sellAsset(id, price){
-  const i = G.assets.findIndex(a=>a.id===id);
-  if(i<0) return;
-  const a = G.assets[i];
-  G.cash += price;
-  G.passive -= a.passive;
-  G.assets.splice(i,1);
-  log(`📈 Продано: ${a.nm} за ${price} T (профит +${price-a.cost})`);
-  toast(`💰 +${price} T за ${a.nm}`, true);
-  closeModal();
-}
-
-/* ================== ИНИЦИАЛИЗАЦИЯ ================== */
+/* ======================= СТАРТ ======================= */
 document.addEventListener('DOMContentLoaded', ()=>{
-  renderProfList();
-  const saved = load();
-  if(saved){
-    G = saved;
-    document.getElementById('s-start').style.display = 'none';
-    document.getElementById('s-game').style.display = 'block';
-    renderAll();
-  }
+  load();
+  newSession();
+  renderTop();
+  renderLog();
 });
 </script>
 </body>
