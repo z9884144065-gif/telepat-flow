@@ -3,73 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>💱 P2P Автоматизация — ДЕМО</title>
+<title>💱 Trading • DEMO</title>
 <style>
-:root{--bg:#0b1018;--card:#141c28;--line:#39475b;--gold:#f4cf70;--text:#fff;--muted:#9da9b9;--green:#39d98a;--red:#ff647c;--blue:#4f8cff}
-*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#26334a 0,#0b1018 42%),#0b1018;color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
-.app{max-width:600px;margin:auto;padding:14px 12px 30px}
-h1{text-align:center;color:var(--gold);margin:6px 0 2px;font-size:20px}
-.sub{text-align:center;color:var(--muted);font-size:11px;margin-bottom:12px}
-.card{background:linear-gradient(145deg,#1b2636,#111925);border:1px solid var(--line);border-radius:16px;padding:13px;margin-bottom:10px;box-shadow:0 8px 20px #0006}
-.card.gold{border-color:#80652b}
-.title{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:.6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-button{padding:11px;border-radius:11px;border:0;background:linear-gradient(135deg,#f5d477,#c99629);color:#17120a;font-weight:bold;font-size:14px;cursor:pointer}
-button.ok{background:linear-gradient(135deg,#39d98a,#2ba86a);color:#0d280d;width:100%;padding:13px}
-button:disabled{opacity:.4;cursor:not-allowed}
-input[type=number]{width:100%;padding:10px;border-radius:11px;border:1px solid #45536a;background:#0d1520;color:#fff;font-size:14px;outline:none}
-input[type=range]{width:100%;margin:8px 0;accent-color:#f4cf70;height:6px}
-label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8px}
-.info{color:var(--muted);font-size:11px;line-height:1.4}
-.ok{color:var(--green)}.er{color:var(--red)}.gold{color:var(--gold)}
-.tabs{display:flex;gap:5px;margin-bottom:8px}
-.tab{flex:1;padding:8px 4px;border-radius:10px;background:#0d1520;border:1px solid #2d3a4c;color:#9da9b9;font-size:12px;font-weight:bold;cursor:pointer;text-align:center;transition:.15s}
-.tab.active{background:linear-gradient(145deg,#2a2415,#1a160d);border-color:var(--gold);color:var(--gold);box-shadow:0 0 10px #f4cf7044}
-.price-wrap{display:flex;align-items:baseline;justify-content:center;gap:6px;margin:4px 0}
-.price-big{font-size:36px;font-weight:bold;color:#fff;line-height:1;letter-spacing:-1px;transition:color .3s}
-.price-big.up{color:#39d98a;text-shadow:0 0 20px #39d98a88}
-.price-big.down{color:#ff647c;text-shadow:0 0 20px #ff647c88}
-.price-unit{color:#8f9bab;font-size:14px}
-.price-meta{display:flex;justify-content:space-between;font-size:11px;padding:0 4px;margin-bottom:8px}
-.supply-info{text-align:center;font-size:10px;color:#7f8c9f;margin-bottom:6px}
-#chart{display:block;width:100%;height:120px;border-radius:10px;background:#0d1520;border:1px solid #2d3a4c}
-.bal-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.bal{background:#0d1520;border:1px solid #2d3a4c;border-radius:11px;padding:10px}
-.bal span{font-size:11px;color:#8f9bab;display:block}
-.bal b{font-size:16px;color:#fff;display:block;margin-top:3px}
-.bal.gold{border-color:#66572e;background:linear-gradient(145deg,#25200e,#14110a)}
-.bal.gold b{color:var(--gold)}
-.side-toggle{display:flex;gap:6px;margin-bottom:6px}
-.side-btn{flex:1;padding:11px;font-size:12px;font-weight:bold;border-radius:11px;border:1px solid #45536a;background:#0d1520;color:#9da9b9;cursor:pointer;transition:.15s}
-.side-btn.buy.active{background:linear-gradient(145deg,#1f4a2f,#0d2818);color:#39d98a;border-color:#39d98a;box-shadow:0 0 12px #39d98a55}
-.side-btn.sell.active{background:linear-gradient(145deg,#4a1f2f,#280d18);color:#ff647c;border-color:#ff647c;box-shadow:0 0 12px #ff647c55}
-.quick-pcts{display:flex;gap:5px;margin-top:6px}
-.quick-pcts button{flex:1;padding:7px 4px;font-size:11px;background:#1b2636;color:#cfd8e4;border:1px solid #3a4658;border-radius:8px}
-.preview{background:#0d1520;border:1px solid #303d50;border-radius:11px;padding:10px;margin:10px 0;font-size:12px}
-.preview>div{display:flex;justify-content:space-between;padding:3px 0}
-.preview b{color:#f4cf70;font-size:14px}
-.impact{margin-top:6px;padding-top:6px;border-top:1px solid #1a2534;font-size:11px;color:#8f9bab}
-.impact b{color:#f4cf70}
-.book-head{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:5px}
-.bh{font-size:11px;font-weight:bold;letter-spacing:.5px;padding:5px;border-radius:7px;text-align:center}
-.bh.sell{background:#4a1f2f;color:#ff647c}
-.bh.buy{background:#1f4a2f;color:#39d98a}
-.book{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:280px}
-.col{display:flex;flex-direction:column;gap:3px;overflow-y:auto;min-height:100px}
-.empty{color:#4a596d;text-align:center;font-size:10px;padding:20px 4px}
-.order{padding:6px 8px;border-radius:8px;font-size:10px;display:flex;justify-content:space-between;align-items:center;gap:5px;border:1px solid transparent;position:relative}
-.order.sell{background:linear-gradient(145deg,#2a1515,#1a0d0d);border-color:#4a2424;color:#ffb3b3}
-.order.buy{background:linear-gradient(145deg,#152a1f,#0d1a13);border-color:#244a34;color:#a8e6b9}
-.order.mine{border-color:var(--gold);box-shadow:0 0 8px #f4cf7055}
-.order .l{flex:1;min-width:0}
-.order .p{font-weight:bold;font-size:11px}
-.order .a{font-size:9px;color:#8f9bab;margin-top:1px}
-.order .x{cursor:pointer;color:#8f9bab;font-size:12px;padding:0 3px}
-.log-list{display:flex;flex-direction:column;gap:2px;max-height:170px;overflow-y:auto;font-size:10px}
-.log-line{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #1a2534}
-.log-line:last-child{border:0}
-.log-line .tm{color:#7f8c9f;margin-right:5px;flex-shrink:0}
-.toast{position:fixed;left:12px;right:12px;top:12px;z-index:4000;padding:11px;border-radius:11px;background:#1b2737;border:1px solid #4c5b70;text-align:center;font-size:12px;display:none}
+:root{--bg:#0b0e11;--card:#181a20;--border:#2b3139;--green:#0ecb81;--red:#f6465d;--text:#eaecef;--muted:#848e9c;--gold:#f0b90b;--blue:#4f8cff}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:13px;min-height:100vh}
+.app{max-width:600px;margin:auto;padding:8px 8px 24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden}
+
+/* TOP BAR */
+.topbar{padding:10px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:8px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.token-select{background:transparent;color:var(--text);border:0;font-size:18px;font-weight:bold;padding:0;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23848e9c' stroke-width='3'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 2px center;padding-right:20px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px;font-size:11px}
+.stats-grid>div{text-align:center}
+.stats-grid span{color:var(--muted);display:block;margin-bottom:2px}
+.stats-grid b{color:var(--text);font-weight:600}
+
+/* PRICE */
+.price-header{display:flex;align-items:baseline;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:8px}
+.price-big{font-size:32px;font-weight:700;line-height:1;letter-spacing:-1px;transition:color .3s}
+.price-big.green{color:var(--green)}
+.price-big.red{color:var(--red)}
+.change{font-size:14px;font-weight:600}
+.change.up{color:var(--green)}
+.change.down{color:var(--red)}
+.price-label{margin-left:auto;color:var(--muted);font-size:11px}
+
+/* CHART */
+.chart-card{padding:6px;margin-bottom:8px}
+canvas#chart{display:block;width:100%;height:220px}
+
+/* ORDER BOOK */
+.ob-head{display:grid;grid-template-columns:1fr 1fr 1fr;padding:8px 12px;font-size:10px;color:var(--muted);border-bottom:1px solid var(--border);letter-spacing:.3px}
+.ob-head span:nth-child(2),.ob-head span:nth-child(3){text-align:right}
+.ob-body{padding:0 0}
+.ob-row{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;padding:3px 12px;font-size:11px;font-variant-numeric:tabular-nums;overflow:hidden}
+.ob-row .ob-bar{position:absolute;top:0;bottom:0;right:0;z-index:0;pointer-events:none;opacity:.22}
+.ob-bar.sell{background:var(--red)}
+.ob-bar.buy{background:var(--green)}
+.ob-row span{position:relative;z-index:1}
+.ob-row span:nth-child(2),.ob-row span:nth-child(3){text-align:right;color:var(--text)}
+.ob-price.red{color:var(--red)}
+.ob-price.green{color:var(--green)}
+.ob-mid{padding:7px 12px;text-align:center;font-size:18px;font-weight:bold;color:var(--text);background:rgba(255,255,255,.02);border-top:1px solid var(--border);border-bottom:1px solid var(--border);transition:color .3s}
+.ob-mid.up{color:var(--green)}
+.ob-mid.down{color:var(--red)}
+
+/* FORM */
+.form-card{padding:12px}
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
+.side{padding:11px;border-radius:8px;border:0;font-size:13px;font-weight:600;cursor:pointer;background:#20242c;color:var(--muted);transition:.15s}
+.side.buy.active{background:var(--green);color:#0b0e11}
+.side.sell.active{background:var(--red);color:#fff}
+label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px;margin-top:8px}
+input[type=number]{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:#0d1014;color:var(--text);font-size:14px;outline:none;font-variant-numeric:tabular-nums}
+input[type=number]:focus{border-color:var(--gold)}
+input[type=range]{width:100%;margin:10px 0 4px;accent-color:var(--gold);height:5px}
+.quick{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:6px}
+.quick button{padding:7px 0;font-size:11px;background:#20242c;color:var(--muted);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.quick button:active{background:#2b3139}
+.prev{background:#0d1014;border:1px solid var(--border);border-radius:8px;padding:10px;margin-top:12px;font-size:12px}
+.prev>div{display:flex;justify-content:space-between;padding:2px 0}
+.prev b{color:var(--gold);font-variant-numeric:tabular-nums}
+.submit{width:100%;padding:14px;border-radius:8px;border:0;font-size:15px;font-weight:bold;cursor:pointer;margin-top:12px;background:var(--green);color:#0b0e11;transition:.15s}
+.submit.sell-mode{background:var(--red);color:#fff}
+
+/* LOG */
+.log-title{padding:10px 12px;font-size:11px;color:var(--muted);letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.log{max-height:200px;overflow-y:auto}
+.log-row{display:grid;grid-template-columns:1fr 1fr 1fr;padding:4px 12px;font-size:11px;font-variant-numeric:tabular-nums;border-bottom:1px solid rgba(43,49,57,.5)}
+.log-row.buy span:first-child{color:var(--green)}
+.log-row.sell span:first-child{color:var(--red)}
+.log-row span:nth-child(2),.log-row span:nth-child(3){text-align:right;color:var(--muted)}
+
+/* TOAST */
+.toast{position:fixed;left:12px;right:12px;top:12px;z-index:4000;padding:11px;border-radius:8px;background:#1e2329;border:1px solid var(--border);text-align:center;font-size:12px;display:none}
 .toast.show{display:block;animation:fi .25s}
+.toast.ok{border-color:var(--green)}
+.toast.er{border-color:var(--red)}
 @keyframes fi{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 </style>
 </head>
@@ -77,113 +89,114 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
 <div id="toast" class="toast"></div>
 
 <div class="app">
-  <h1>💱 P2P АВТОМАТИЗАЦИЯ</h1>
-  <div class="sub">ДЕМО • Курс растёт от объёма × запас</div>
-
-  <div class="card gold">
-    <div class="title">📈 КУРС</div>
-    <div class="tabs">
-      <button class="tab active" data-token="TG">🥇 TG</button>
-      <button class="tab" data-token="AI">🤖 AI</button>
-      <button class="tab" data-token="VK">🎮 VK</button>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topline">
+      <select id="tokenSelect" class="token-select" onchange="onTokenChange(this.value)">
+        <option value="TG">TG / USD</option>
+        <option value="AI">AI / USD</option>
+        <option value="VK">VK / USD</option>
+      </select>
+      <span style="color:var(--muted);font-size:11px">Спот • Демо</span>
     </div>
-    <div class="price-wrap">
-      <div class="price-big" id="priceBig">100.00</div>
-      <div class="price-unit">TUSD</div>
-    </div>
-    <div class="price-meta">
-      <span id="startChange" class="info">от старта: 0%</span>
-      <span id="earnedInfo" class="ok">💵 0.00 T</span>
-    </div>
-    <div class="supply-info" id="supplyInfo">Запас: 1 000 TG • 1% = +0.5% цены</div>
-    <canvas id="chart" height="120"></canvas>
-  </div>
-
-  <div class="card">
-    <div class="title">💰 БАЛАНС</div>
-    <div class="bal-grid">
-      <div class="bal"><span>🥇 TG</span><b id="balTG">500</b></div>
-      <div class="bal"><span>🤖 AI</span><b id="balAI">100K</b></div>
-      <div class="bal"><span>🎮 VK</span><b id="balVK">1M</b></div>
-      <div class="bal gold"><span>💵 TUSD</span><b id="balTUSD">10000.00</b></div>
+    <div class="stats-grid">
+      <div><span>Макс 24ч</span><b id="statHigh">—</b></div>
+      <div><span>Мин 24ч</span><b id="statLow">—</b></div>
+      <div><span>Оборот 24ч</span><b id="statVol">—</b></div>
     </div>
   </div>
 
+  <!-- PRICE -->
+  <div class="price-header">
+    <div class="price-big" id="bigPrice">100.00</div>
+    <div class="change up" id="bigChange">+0.00%</div>
+    <div class="price-label">≈ <b id="bigPriceUSD">100.00</b> USD</div>
+  </div>
+
+  <!-- CHART -->
+  <div class="card chart-card">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <!-- ORDER BOOK -->
   <div class="card">
-    <div class="title">📝 НОВЫЙ ОРДЕР • <span id="tokenLabel">🥇 TG</span></div>
-    <div class="side-toggle">
-      <button id="btnBuy" class="side-btn buy active" onclick="setSide('buy')">🟩 КУПИТЬ</button>
-      <button id="btnSell" class="side-btn sell" onclick="setSide('sell')">🟥 ПРОДАТЬ</button>
+    <div class="ob-head">
+      <span>Цена (USD)</span>
+      <span>Кол-во</span>
+      <span>Сумма (USD)</span>
     </div>
-    <label>Цена за 1 <span id="unitLabel">TG</span> (TUSD)</label>
-    <input id="ordPrice" type="number" step="0.000001" value="100">
-    <label>Объём: <b id="pctLabel" style="color:#f4cf70">25%</b></label>
+    <div class="ob-body" id="obSells"></div>
+    <div class="ob-mid" id="obMid">100.00</div>
+    <div class="ob-body" id="obBuys"></div>
+  </div>
+
+  <!-- FORM -->
+  <div class="card form-card">
+    <div class="sides">
+      <button id="btnBuy" class="side buy active" onclick="setSide('buy')">Купить</button>
+      <button id="btnSell" class="side sell" onclick="setSide('sell')">Продать</button>
+    </div>
+
+    <label>Цена (USD)</label>
+    <input id="ordPrice" type="number" step="0.0001" value="100">
+
+    <label>Объём: <b id="pctLabel" style="color:var(--gold)">25%</b></label>
     <input id="pctSlider" type="range" min="1" max="100" value="25" step="1">
-    <div class="quick-pcts">
+    <div class="quick">
       <button onclick="setPct(10)">10%</button>
       <button onclick="setPct(25)">25%</button>
       <button onclick="setPct(50)">50%</button>
       <button onclick="setPct(75)">75%</button>
       <button onclick="setPct(100)">100%</button>
     </div>
-    <div class="preview">
-      <div><span>Кол-во:</span><b id="ordAmountDisp">—</b></div>
-      <div><span>Сумма:</span><b id="ordTotalDisp">—</b></div>
-      <div class="impact">
-        Прогноз влияния на курс: <b id="impactDisp">0.00%</b><br>
-        <span id="impactHint">(если ордер сработает полностью)</span>
-      </div>
+
+    <div class="prev">
+      <div><span>Кол-во:</span><b id="prevAmt">—</b></div>
+      <div><span>Сумма:</span><b id="prevSum">—</b></div>
     </div>
-    <button class="ok" onclick="submitOrder()">🚀 РАЗМЕСТИТЬ ОРДЕР</button>
+
+    <button class="submit" id="submitBtn" onclick="submitOrder()">КУПИТЬ TG</button>
   </div>
 
+  <!-- LOG -->
   <div class="card">
-    <div class="title">📖 КНИГА ОРДЕРОВ<span class="info" style="font-size:10px">● live</span></div>
-    <div class="book-head">
-      <div class="bh sell">SELL 🟥</div>
-      <div class="bh buy">BUY 🟩</div>
-    </div>
-    <div class="book">
-      <div class="col" id="sellBook"></div>
-      <div class="col" id="buyBook"></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="title">⚡ ЛЕНТА СДЕЛОК</div>
-    <div id="logList" class="log-list"><div class="info" style="text-align:center;padding:10px">Ждём сделок…</div></div>
+    <div class="log-title">ЛЕНТА СДЕЛОК</div>
+    <div id="logList" class="log"><div style="padding:14px;text-align:center;color:var(--muted)">Ждём сделок…</div></div>
   </div>
 </div>
 
 <script>
-/* ================= КОНФИГ ================= */
+/* ============ КОНФИГ ============ */
 const TOKENS = {
-  TG: { decimals: 2, start: 100,    supply: 1_000 },
-  AI: { decimals: 4, start: 0.01,   supply: 10_000_000 },
-  VK: { decimals: 3, start: 0.5,    supply: 800_000_000 },
+  TG: { decimals: 2, supply: 1000,      start: 100 },
+  AI: { decimals: 4, supply: 10000000,  start: 0.01 },
+  VK: { decimals: 3, supply: 800000000, start: 0.5 },
 };
-
-/* Коэффициенты влияния на цену */
-const K_BUY  = 0.5;   // покупка 1% запаса → +0.5%
-const K_SELL = 0.25;  // продажа 1% запаса → -0.25%
-
+const K_BUY  = 0.5;
+const K_SELL = 0.25;
+const CANDLE_PERIOD = 3000; // 3 сек = 1 свеча (демо-день)
+const MAX_CANDLES   = 80;
 const BOT_NAMES = ['Вася','Петя','Иван','Маша','Олег','Коля','Аня','Дима','Катя','Саша','Лена','Гриша','Толя','Юля'];
 
-/* ================= СОСТОЯНИЕ ================= */
+/* ============ СОСТОЯНИЕ ============ */
 const S = {
-  price: { TG: 100, AI: 0.01, VK: 0.5 },
-  startPrice: { TG: 100, AI: 0.01, VK: 0.5 },
-  history: { TG: [100], AI: [0.01], VK: [0.5] },
-  bal: { TG: 500, AI: 100000, VK: 1000000, TUSD: 10000 },
-  orders: [],
-  log: [],
   activeToken: 'TG',
   side: 'buy',
   pct: 25,
+  price: {},
+  startPrice: {},
+  candles: {},
+  currentCandle: {},
+  high24: {},
+  low24: {},
+  vol24: {},
+  bal: { TG: 100, AI: 500000, VK: 100000, TUSD: 10000 },
+  orders: [],
+  log: [],
   earned: 0,
 };
 
-/* ================= УТИЛИТЫ ================= */
+/* ============ УТИЛИТЫ ============ */
 function uid(){ return 'o' + Math.random().toString(36).slice(2,10); }
 function fmt(v, d=2){ return Number(v).toFixed(d); }
 function fmtBig(v){
@@ -191,58 +204,102 @@ function fmtBig(v){
   if(n >= 1e9) return (n/1e9).toFixed(2).replace(/\.?0+$/,'') + 'B';
   if(n >= 1e6) return (n/1e6).toFixed(2).replace(/\.?0+$/,'') + 'M';
   if(n >= 1e3) return (n/1e3).toFixed(1).replace(/\.?0+$/,'') + 'K';
-  return String(Math.round(n*10000)/10000);
+  return String(Math.round(n*100)/100);
 }
-function fmtInt(v){ return Number(v).toLocaleString('ru-RU'); }
-function toast(t, ok=false){
+function fmtUSD(v){
+  const n = Number(v);
+  if(n >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
+  if(n >= 1e3) return '$' + (n/1e3).toFixed(2) + 'K';
+  return '$' + n.toFixed(2);
+}
+function toast(t, type=''){
   const el = document.getElementById('toast');
   el.textContent = t;
-  el.style.borderColor = ok ? '#397b5b' : '#4c5b70';
-  el.classList.add('show');
+  el.className = 'toast show' + (type ? ' ' + type : '');
   clearTimeout(el._t);
-  el._t = setTimeout(()=>el.classList.remove('show'), 1900);
+  el._t = setTimeout(()=>el.classList.remove('show'), 1800);
 }
-function pushLog(txt){
-  const time = new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  S.log.unshift({t:time, txt});
-  if(S.log.length > 25) S.log.length = 25;
+function pushLog(txt, side){
+  const t = new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  S.log.unshift({t, txt, side});
+  if(S.log.length > 30) S.log.length = 30;
   renderLog();
 }
 
-/* ================= ЦЕНА (ОТ ОБЪЁМА) ================= */
+/* ============ ИНИЦИАЛИЗАЦИЯ ЦЕН ============ */
+function seedData(){
+  for(const token of Object.keys(TOKENS)){
+    S.candles[token] = [];
+    S.currentCandle[token] = null;
+    let price = TOKENS[token].start * (0.95 + Math.random() * 0.1);
+    S.startPrice[token] = price;
+    const period = CANDLE_PERIOD;
+    const now = Date.now();
+    for(let i = 30; i >= 0; i--){
+      const t = Math.floor((now - i * period) / period) * period;
+      const o = price;
+      const change = (Math.random() - 0.47) * 0.015;
+      const c = o * (1 + change);
+      const h = Math.max(o, c) * (1 + Math.random() * 0.005);
+      const l = Math.min(o, c) * (1 - Math.random() * 0.005);
+      S.candles[token].push({ o, h, l, c, t });
+      price = c;
+    }
+    S.price[token] = price;
+    S.high24[token] = Math.max(...S.candles[token].map(c => c.h));
+    S.low24[token]  = Math.min(...S.candles[token].map(c => c.l));
+    S.vol24[token]  = 0;
+  }
+}
+
+/* ============ ЦЕНА / СВЕЧИ ============ */
 function applyPriceImpact(token, side, volume){
   const supply = TOKENS[token].supply;
   const ratio  = volume / supply;
   const impact = ratio * (side === 'buy' ? K_BUY : -K_SELL);
-  const oldP = S.price[token];
-  S.price[token] = oldP * (1 + impact);
-  S.history[token].push(S.price[token]);
-  if(S.history[token].length > 80) S.history[token].shift();
-
-  if(token === S.activeToken){
-    const el = document.getElementById('priceBig');
-    el.classList.remove('up','down');
-    el.classList.add(impact > 0 ? 'up' : 'down');
-    setTimeout(() => el.classList.remove('up','down'), 700);
-  }
+  S.price[token] = S.price[token] * (1 + impact);
   return impact;
 }
 
-/* ================= БОТЫ ================= */
+function onTrade(token, price, volume){
+  const period = CANDLE_PERIOD;
+  const bucket = Math.floor(Date.now() / period) * period;
+  if(!S.currentCandle[token] || S.currentCandle[token].t !== bucket){
+    if(S.currentCandle[token]){
+      S.candles[token].push(S.currentCandle[token]);
+      if(S.candles[token].length > MAX_CANDLES) S.candles[token].shift();
+    }
+    S.currentCandle[token] = { o:price, h:price, l:price, c:price, t:bucket };
+  } else {
+    const c = S.currentCandle[token];
+    c.h = Math.max(c.h, price);
+    c.l = Math.min(c.l, price);
+    c.c = price;
+  }
+  S.high24[token] = Math.max(S.high24[token], price);
+  S.low24[token]  = Math.min(S.low24[token], price);
+  S.vol24[token] += price * volume;
+}
+
+function getAllCandles(token){
+  const arr = S.candles[token].slice();
+  if(S.currentCandle[token]) arr.push(S.currentCandle[token]);
+  return arr;
+}
+
+/* ============ БОТЫ ============ */
 function botOrder(token){
   const mid = S.price[token];
   const side = Math.random() < 0.5 ? 'buy' : 'sell';
   let price;
-  if(side === 'sell') price = mid * (1.005 + Math.random() * 0.03);
-  else                price = mid * (0.965 + Math.random() * 0.025);
-
+  if(side === 'sell') price = mid * (1.003 + Math.random() * 0.025);
+  else                price = mid * (0.972 + Math.random() * 0.025);
   const d = TOKENS[token].decimals;
   price = Math.round(price * Math.pow(10, d)) / Math.pow(10, d);
 
-  // Боты торгуют объёмами, сопоставимыми с запасом
   const supply = TOKENS[token].supply;
-  const supplyShare = 0.002 + Math.random() * 0.01; // 0.2% – 1.2% запаса
-  const amount = Math.max(1, Math.floor(supply * supplyShare));
+  const share = 0.002 + Math.random() * 0.008;
+  const amount = Math.max(1, Math.floor(supply * share));
 
   S.orders.push({
     id: uid(), side, price, amount, filled: 0, token,
@@ -253,11 +310,11 @@ function botOrder(token){
 
 function initBots(){
   for(const t of Object.keys(TOKENS)){
-    for(let i = 0; i < 5; i++) botOrder(t);
+    for(let i = 0; i < 8; i++) botOrder(t);
   }
 }
 
-/* ================= МАТЧИНГ ================= */
+/* ============ МАТЧИНГ ============ */
 function matchAll(){
   let anyTrade = false;
   const eps = 1e-9;
@@ -273,9 +330,7 @@ function matchAll(){
       const s = sells[0], b = buys[0];
       if(s.price > b.price + eps) break;
 
-      const sRem = s.amount - s.filled;
-      const bRem = b.amount - b.filled;
-      const vol = Math.min(sRem, bRem);
+      const vol = Math.min(s.amount - s.filled, b.amount - b.filled);
       const dealPrice = s.price;
       const usd = vol * dealPrice;
 
@@ -284,199 +339,248 @@ function matchAll(){
 
       S.earned += usd * 0.01;
 
-      // === ВЛИЯНИЕ НА ЦЕНУ ===
-      // Определяем "агрессора": у кого ts больше, тот "активный"
-      const aggressorSide = s.ts > b.ts ? 'sell' : 'buy';
-      const impact = applyPriceImpact(token, aggressorSide, vol);
+      const aggressor = s.ts > b.ts ? 'sell' : 'buy';
+      const impact = applyPriceImpact(token, aggressor, vol);
 
       s.filled += vol;
       b.filled += vol;
 
-      const impactStr = (impact*100 >= 0 ? '+' : '') + (impact*100).toFixed(3) + '%';
-      const impactColor = impact >= 0 ? '🟢' : '🔴';
-      pushLog(`💥 ${s.mine?'🧑':'🤖'}${s.owner} → ${b.mine?'🧑':'🤖'}${b.owner}: ${fmtBig(vol)} ${token} × ${fmt(dealPrice, TOKENS[token].decimals)} = ${fmt(usd,2)} T ${impactColor} ${impactStr}`);
+      onTrade(token, dealPrice, vol);
+
+      const impactPct = (impact >= 0 ? '+' : '') + (impact * 100).toFixed(3) + '%';
+      pushLog(`${fmt(dealPrice, TOKENS[token].decimals)} × ${fmtBig(vol)} ${token} ${impactPct}`, aggressor);
       anyTrade = true;
     }
   }
 
   S.orders = S.orders.filter(o => o.filled < o.amount - eps);
-  if(S.orders.length > 300) S.orders = S.orders.slice(-300);
+  if(S.orders.length > 400) S.orders = S.orders.slice(-400);
 
   return anyTrade;
 }
 
-/* ================= ГРАФИК ================= */
+/* ============ ГРАФИК (свечи) ============ */
 function drawChart(){
   const canvas = document.getElementById('chart');
   if(!canvas) return;
   const dpr = window.devicePixelRatio || 1;
-  const W = canvas.offsetWidth || 340;
-  const H = 120;
+  const W = canvas.clientWidth || 340;
+  const H = 220;
   if(canvas.width !== W*dpr || canvas.height !== H*dpr){
-    canvas.width = W*dpr;
-    canvas.height = H*dpr;
-    canvas.style.height = H + 'px';
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
   }
   const ctx = canvas.getContext('2d');
-  ctx.setTransform(dpr,0,0,dpr,0,0);
-  ctx.clearRect(0,0,W,H);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, W, H);
 
-  const data = S.history[S.activeToken];
-  const decimals = TOKENS[S.activeToken].decimals;
+  const token = S.activeToken;
+  const d = TOKENS[token].decimals;
+  const candles = getAllCandles(token);
 
-  if(!data || data.length < 2){
-    ctx.fillStyle = '#4a596d';
-    ctx.font = '12px Arial';
+  if(!candles.length){
+    ctx.fillStyle = '#848e9c';
+    ctx.font = '12px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Мало данных — сделай сделку', W/2, H/2);
+    ctx.fillText('Ждём данных…', W/2, H/2);
     return;
   }
 
-  const min = Math.min(...data);
-  const max = Math.max(...data);
-  const range = (max - min) || (max * 0.02) || 1;
-  const padT = 14, padB = 18, padL = 8, padR = 8;
-  const plotH = H - padT - padB;
-  const plotW = W - padL - padR;
-  const stepX = plotW / Math.max(1, data.length - 1);
-  const X = i => padL + i * stepX;
-  const Y = v => padT + plotH - ((v - min) / range) * plotH;
+  const N = Math.min(50, candles.length);
+  const visible = candles.slice(-N);
 
-  ctx.strokeStyle = '#1f2a3b';
+  let min = Math.min(...visible.map(c => c.l));
+  let max = Math.max(...visible.map(c => c.h));
+  const pad = (max - min) * 0.08 || max * 0.01 || 1;
+  min -= pad; max += pad;
+  const range = max - min || 1;
+
+  const padTop = 8, padBottom = 20, padRight = 52, padLeft = 4;
+  const plotW = W - padRight - padLeft;
+  const plotH = H - padTop - padBottom;
+
+  // Сетка
+  ctx.strokeStyle = '#1e2329';
   ctx.lineWidth = 1;
-  ctx.setLineDash([2,4]);
-  [min, (min+max)/2, max].forEach(v => {
-    ctx.beginPath(); ctx.moveTo(padL, Y(v)); ctx.lineTo(W - padR, Y(v)); ctx.stroke();
+  for(let i = 0; i <= 4; i++){
+    const y = padTop + (plotH / 4) * i;
+    ctx.beginPath();
+    ctx.moveTo(padLeft, y);
+    ctx.lineTo(padLeft + plotW, y);
+    ctx.stroke();
+    // метка
+    const priceAt = max - (range / 4) * i;
+    ctx.fillStyle = '#5e6673';
+    ctx.font = '9px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(fmt(priceAt, d), padLeft + plotW + 4, y + 3);
+  }
+
+  // Свечи
+  const cw = plotW / N;
+  const bodyW = Math.max(1.5, cw * 0.7);
+
+  visible.forEach((c, i) => {
+    const x = padLeft + i * cw + cw / 2;
+    const yH = padTop + ((max - c.h) / range) * plotH;
+    const yL = padTop + ((max - c.l) / range) * plotH;
+    const yO = padTop + ((max - c.o) / range) * plotH;
+    const yC = padTop + ((max - c.c) / range) * plotH;
+
+    const isGreen = c.c >= c.o;
+    const color = isGreen ? '#0ecb81' : '#f6465d';
+    ctx.strokeStyle = color;
+    ctx.fillStyle   = color;
+
+    // фитиль
+    ctx.beginPath();
+    ctx.moveTo(x, yH);
+    ctx.lineTo(x, yL);
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // тело
+    const top = Math.min(yO, yC);
+    const h = Math.max(1.5, Math.abs(yC - yO));
+    ctx.fillRect(x - bodyW/2, top, bodyW, h);
   });
+
+  // Текущая цена
+  const last = visible[visible.length - 1];
+  const yLast = padTop + ((max - last.c) / range) * plotH;
+  ctx.strokeStyle = last.c >= last.o ? '#0ecb81' : '#f6465d';
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  ctx.moveTo(padLeft, yLast);
+  ctx.lineTo(padLeft + plotW, yLast);
+  ctx.stroke();
   ctx.setLineDash([]);
 
-  const isUp = data[data.length-1] >= data[0];
-  const color = isUp ? '#39d98a' : '#ff647c';
-
-  const grad = ctx.createLinearGradient(0, padT, 0, H - padB);
-  grad.addColorStop(0, color + '66');
-  grad.addColorStop(1, color + '00');
-  ctx.beginPath();
-  ctx.moveTo(X(0), Y(data[0]));
-  data.forEach((v,i) => ctx.lineTo(X(i), Y(v)));
-  ctx.lineTo(X(data.length-1), H - padB);
-  ctx.lineTo(X(0), H - padB);
-  ctx.closePath();
-  ctx.fillStyle = grad;
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.moveTo(X(0), Y(data[0]));
-  data.forEach((v,i) => ctx.lineTo(X(i), Y(v)));
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
-  ctx.lineJoin = 'round';
-  ctx.stroke();
-
-  const lx = X(data.length-1), ly = Y(data[data.length-1]);
-  ctx.beginPath(); ctx.arc(lx, ly, 5, 0, Math.PI*2);
-  ctx.fillStyle = color + '55'; ctx.fill();
-  ctx.beginPath(); ctx.arc(lx, ly, 2.5, 0, Math.PI*2);
-  ctx.fillStyle = color; ctx.fill();
-
-  ctx.fillStyle = '#7f8c9f';
-  ctx.font = '9px Arial';
-  ctx.textAlign = 'left';
-  ctx.fillText(fmt(max, decimals), padL + 2, padT + 8);
-  ctx.fillText(fmt(min, decimals), padL + 2, H - padB - 3);
-  ctx.textAlign = 'right';
-  ctx.fillText(data.length + ' точек', W - padR - 2, H - padB - 3);
+  // Плашка цены справа
+  const yBox = Math.max(padTop, Math.min(H - padBottom - 16, yLast - 8));
+  ctx.fillStyle = last.c >= last.o ? '#0ecb81' : '#f6465d';
+  ctx.fillRect(padLeft + plotW + 2, yBox, padRight - 4, 16);
+  ctx.fillStyle = '#0b0e11';
+  ctx.font = 'bold 10px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(fmt(last.c, d), padLeft + plotW + padRight / 2, yBox + 11);
 }
 
-/* ================= РЕНДЕР ================= */
-function renderTop(){
-  document.getElementById('balTG').textContent = fmtBig(S.bal.TG);
-  document.getElementById('balAI').textContent = fmtBig(S.bal.AI);
-  document.getElementById('balVK').textContent = fmtBig(S.bal.VK);
-  document.getElementById('balTUSD').textContent = fmt(S.bal.TUSD, 2);
-
-  const tabEl = document.querySelector(`.tab[data-token="${S.activeToken}"]`);
-  document.getElementById('tokenLabel').textContent = tabEl ? tabEl.textContent : S.activeToken;
-  document.getElementById('unitLabel').textContent = S.activeToken;
-  document.getElementById('priceBig').textContent = fmt(S.price[S.activeToken], TOKENS[S.activeToken].decimals);
-
-  const chg = (S.price[S.activeToken] / S.startPrice[S.activeToken] - 1) * 100;
-  const chgEl = document.getElementById('startChange');
-  chgEl.textContent = `от старта: ${chg >= 0 ? '+' : ''}${chg.toFixed(2)}%`;
-  chgEl.className = chg >= 0 ? 'ok' : 'er';
-
-  document.getElementById('earnedInfo').textContent = `💵 ${fmt(S.earned, 2)} T`;
-
-  const supply = TOKENS[S.activeToken].supply;
-  document.getElementById('supplyInfo').textContent =
-    `Запас: ${fmtInt(supply)} ${S.activeToken} • 1% = +${K_BUY*1}% цены`;
-
-  document.querySelectorAll('.tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.token === S.activeToken);
-  });
-
-  document.getElementById('pctLabel').textContent = S.pct + '%';
-  document.getElementById('pctSlider').value = S.pct;
-
-  drawChart();
-  updatePreview();
-}
-
-function renderBook(){
+/* ============ РЕНДЕР СТАКАНА ============ */
+function renderOrderBook(){
   const token = S.activeToken;
-  const eps = 1e-9;
-  const sells = S.orders.filter(o => o.token === token && o.side === 'sell' && o.filled < o.amount - eps)
-                        .sort((a,b) => a.price - b.price || a.ts - b.ts).slice(0, 25);
-  const buys  = S.orders.filter(o => o.token === token && o.side === 'buy'  && o.filled < o.amount - eps)
-                        .sort((a,b) => b.price - a.price || a.ts - b.ts).slice(0, 25);
-
-  const sb = document.getElementById('sellBook');
-  const bb = document.getElementById('buyBook');
   const d = TOKENS[token].decimals;
+  const eps = 1e-9;
 
-  sb.innerHTML = sells.length ? sells.map(o => `
-    <div class="order sell ${o.mine?'mine':''}">
-      <div class="l">
-        <div class="p">${fmt(o.price, d)}</div>
-        <div class="a">${fmtBig(o.amount - o.filled)} ${token} • ${o.mine?'вы':o.owner}</div>
-      </div>
-      ${o.mine ? `<span class="x" onclick="cancelOrder('${o.id}')">✕</span>` : ''}
-    </div>`).join('') : '<div class="empty">Нет продавцов</div>';
+  const sells = S.orders
+    .filter(o => o.token === token && o.side === 'sell' && o.filled < o.amount - eps)
+    .sort((a,b) => a.price - b.price)
+    .slice(0, 8);
+  const buys = S.orders
+    .filter(o => o.token === token && o.side === 'buy' && o.filled < o.amount - eps)
+    .sort((a,b) => b.price - a.price)
+    .slice(0, 8);
 
-  bb.innerHTML = buys.length ? buys.map(o => `
-    <div class="order buy ${o.mine?'mine':''}">
-      <div class="l">
-        <div class="p">${fmt(o.price, d)}</div>
-        <div class="a">${fmtBig(o.amount - o.filled)} ${token} • ${o.mine?'вы':o.owner}</div>
-      </div>
-      ${o.mine ? `<span class="x" onclick="cancelOrder('${o.id}')">✕</span>` : ''}
-    </div>`).join('') : '<div class="empty">Нет покупателей</div>';
+  let cS = 0;
+  const sellsOut = sells.map(o => { const usd = o.price * (o.amount - o.filled); cS += usd; return { price:o.price, amount:o.amount - o.filled, usd, cum:cS }; });
+  let cB = 0;
+  const buysOut  = buys.map(o => { const usd = o.price * (o.amount - o.filled); cB += usd; return { price:o.price, amount:o.amount - o.filled, usd, cum:cB }; });
+
+  const maxCum = Math.max(
+    sellsOut.length ? sellsOut[sellsOut.length-1].cum : 1,
+    buysOut.length  ? buysOut[buysOut.length-1].cum  : 1
+  ) || 1;
+
+  // SELLS: ближе к рынку внизу списка (близко к средней цене)
+  const sellsHtml = sellsOut.slice().reverse().map(o => `
+    <div class="ob-row">
+      <div class="ob-bar sell" style="width:${(o.cum/maxCum)*100}%"></div>
+      <span class="ob-price red">${fmt(o.price, d)}</span>
+      <span>${fmtBig(o.amount)}</span>
+      <span>${fmt(o.usd, 2)}</span>
+    </div>`).join('') || '<div style="padding:10px 12px;color:#5e6673;text-align:center;font-size:11px">Нет продавцов</div>';
+
+  const buysHtml = buysOut.map(o => `
+    <div class="ob-row">
+      <div class="ob-bar buy" style="width:${(o.cum/maxCum)*100}%"></div>
+      <span class="ob-price green">${fmt(o.price, d)}</span>
+      <span>${fmtBig(o.amount)}</span>
+      <span>${fmt(o.usd, 2)}</span>
+    </div>`).join('') || '<div style="padding:10px 12px;color:#5e6673;text-align:center;font-size:11px">Нет покупателей</div>';
+
+  document.getElementById('obSells').innerHTML = sellsHtml;
+  document.getElementById('obBuys').innerHTML  = buysHtml;
+
+  const midEl = document.getElementById('obMid');
+  const cur = S.price[token];
+  midEl.textContent = fmt(cur, d) + ' USD';
+  if(lastRenderPrice && cur > lastRenderPrice) midEl.className = 'ob-mid up';
+  else if(lastRenderPrice && cur < lastRenderPrice) midEl.className = 'ob-mid down';
+  else midEl.className = 'ob-mid';
+  lastRenderPrice = cur;
+}
+let lastRenderPrice = null;
+
+/* ============ РЕНДЕР HEADER ============ */
+function renderHeader(){
+  const token = S.activeToken;
+  const d = TOKENS[token].decimals;
+  const cur = S.price[token];
+  const start = S.startPrice[token];
+  const chg = (cur / start - 1) * 100;
+
+  const priceEl = document.getElementById('bigPrice');
+  priceEl.textContent = fmt(cur, d);
+  priceEl.className = 'price-big ' + (chg >= 0 ? 'green' : 'red');
+
+  document.getElementById('bigPriceUSD').textContent = fmt(cur, d);
+
+  const chgEl = document.getElementById('bigChange');
+  chgEl.textContent = (chg >= 0 ? '+' : '') + chg.toFixed(2) + '%';
+  chgEl.className = 'change ' + (chg >= 0 ? 'up' : 'down');
+
+  document.getElementById('statHigh').textContent = fmt(S.high24[token], d);
+  document.getElementById('statLow').textContent  = fmt(S.low24[token], d);
+  document.getElementById('statVol').textContent  = fmtUSD(S.vol24[token]);
 }
 
+/* ============ РЕНДЕР ЛОГА ============ */
 function renderLog(){
   const el = document.getElementById('logList');
-  if(!S.log.length){ el.innerHTML = '<div class="info" style="text-align:center;padding:10px">Ждём сделок…</div>'; return; }
-  el.innerHTML = S.log.map(l => `<div class="log-line"><span class="tm">[${l.t}]</span><span style="flex:1;text-align:right">${l.txt}</span></div>`).join('');
+  if(!S.log.length){ el.innerHTML = '<div style="padding:14px;text-align:center;color:var(--muted)">Ждём сделок…</div>'; return; }
+  el.innerHTML = S.log.map(l => `
+    <div class="log-row ${l.side || ''}">
+      <span>${l.txt}</span>
+      <span>${l.t}</span>
+      <span></span>
+    </div>`).join('');
 }
 
-function renderAll(){ renderTop(); renderBook(); }
-
-/* ================= ФОРМА ================= */
-function setToken(t){
+/* ============ ФОРМА ============ */
+function onTokenChange(t){
   S.activeToken = t;
   document.getElementById('ordPrice').value = fmt(S.price[t], TOKENS[t].decimals);
-  renderTop();
-  renderBook();
+  updateSubmitLabel();
+  renderAll();
 }
 function setSide(s){
   S.side = s;
   document.getElementById('btnBuy').classList.toggle('active', s === 'buy');
   document.getElementById('btnSell').classList.toggle('active', s === 'sell');
+  updateSubmitLabel();
   updatePreview();
+}
+function updateSubmitLabel(){
+  const btn = document.getElementById('submitBtn');
+  const verb = S.side === 'buy' ? 'КУПИТЬ' : 'ПРОДАТЬ';
+  btn.textContent = `${verb} ${S.activeToken}`;
+  btn.classList.toggle('sell-mode', S.side === 'sell');
 }
 function setPct(p){
   S.pct = Math.max(1, Math.min(100, p));
-  renderTop();
+  document.getElementById('pctLabel').textContent = S.pct + '%';
+  document.getElementById('pctSlider').value = S.pct;
+  updatePreview();
 }
 function computeOrder(){
   const token = S.activeToken;
@@ -485,42 +589,32 @@ function computeOrder(){
   if(S.side === 'buy'){
     const usd = S.bal.TUSD * pct;
     const amount = usd / price;
-    return { token, price, amount, usd };
+    return { price, amount, usd };
   } else {
     const amount = S.bal[token] * pct;
     const usd = amount * price;
-    return { token, price, amount, usd };
+    return { price, amount, usd };
   }
 }
 function updatePreview(){
-  const { token, amount, usd } = computeOrder();
-  document.getElementById('ordAmountDisp').textContent = fmtBig(amount) + ' ' + token;
-  document.getElementById('ordTotalDisp').textContent = fmt(usd, 2) + ' TUSD';
-
-  const supply = TOKENS[token].supply;
-  const ratio = amount / supply;
-  const impact = ratio * (S.side === 'buy' ? K_BUY : -K_SELL);
-  const impactPct = impact * 100;
-  const el = document.getElementById('impactDisp');
-  const sign = impactPct >= 0 ? '+' : '';
-  el.textContent = sign + impactPct.toFixed(3) + '%';
-  el.style.color = impactPct >= 0 ? '#39d98a' : '#ff647c';
+  const { amount, usd } = computeOrder();
+  const d = TOKENS[S.activeToken].decimals;
+  document.getElementById('prevAmt').textContent = fmtBig(amount) + ' ' + S.activeToken;
+  document.getElementById('prevSum').textContent = fmt(usd, 2) + ' USD';
 }
 
-/* ================= ОРДЕР ================= */
+/* ============ ОРДЕР ============ */
 function submitOrder(){
   const token = S.activeToken;
-  const inp = document.getElementById('ordPrice');
-  const price = parseFloat(inp.value);
-  if(!Number.isFinite(price) || price <= 0){ toast('Некорректная цена'); return; }
-
+  const price = parseFloat(document.getElementById('ordPrice').value);
+  if(!Number.isFinite(price) || price <= 0){ toast('Некорректная цена', 'er'); return; }
   const { amount, usd } = computeOrder();
-  if(amount <= 0){ toast('Нулевой объём'); return; }
+  if(amount <= 0){ toast('Нулевой объём', 'er'); return; }
 
   if(S.side === 'buy'){
-    if(usd > S.bal.TUSD + 1e-6){ toast(`Мало TUSD: нужно ${fmt(usd,2)}`); return; }
+    if(usd > S.bal.TUSD + 1e-6){ toast(`Мало USD: нужно ${fmt(usd, 2)}`, 'er'); return; }
   } else {
-    if(amount > S.bal[token] + 1e-6){ toast(`Мало ${token}: нужно ${fmtBig(amount)}`); return; }
+    if(amount > S.bal[token] + 1e-6){ toast(`Мало ${token}`, 'er'); return; }
   }
 
   S.orders.push({
@@ -528,39 +622,37 @@ function submitOrder(){
     owner: 'вы', mine: true, ts: Date.now(),
   });
 
-  pushLog(`📝 Вы: ${S.side === 'buy' ? '🟩 покупка' : '🟥 продажа'} ${fmtBig(amount)} ${token} × ${fmt(price, TOKENS[token].decimals)}`);
-  toast('🚀 Ордер размещён', true);
-  renderAll();
-  setTimeout(matchAll, 50);
-}
-
-function cancelOrder(id){
-  const i = S.orders.findIndex(o => o.id === id && o.mine);
-  if(i < 0) return;
-  const o = S.orders[i];
-  S.orders.splice(i, 1);
-  pushLog(`✕ Отменён: ${fmtBig(o.amount - o.filled)} ${o.token}`);
+  matchAll();
+  toast(S.side === 'buy' ? `🟩 Ордер на покупку размещён` : `🟥 Ордер на продажу размещён`, 'ok');
   renderAll();
 }
 
-/* ================= ЦИКЛЫ ================= */
+/* ============ ЦИКЛЫ ============ */
 function botTick(){
   const tokens = Object.keys(TOKENS);
-  botOrder(tokens[Math.floor(Math.random()*tokens.length)]);
-  if(Math.random() < 0.6) botOrder(tokens[Math.floor(Math.random()*tokens.length)]);
-  renderBook();
+  botOrder(tokens[Math.floor(Math.random() * tokens.length)]);
+  if(Math.random() < 0.7) botOrder(tokens[Math.floor(Math.random() * tokens.length)]);
 }
 function matchTick(){
   const did = matchAll();
   if(did) renderAll();
 }
+function renderAll(){
+  renderHeader();
+  renderOrderBook();
+  drawChart();
+}
 
-/* ================= ИНИТ ================= */
+/* ============ ИНИТ ============ */
 document.addEventListener('DOMContentLoaded', () => {
+  seedData();
   initBots();
   matchAll();
 
-  document.querySelectorAll('.tab').forEach(t => { t.onclick = () => setToken(t.dataset.token); });
+  // стартовый ордер в форме
+  document.getElementById('ordPrice').value = fmt(S.price[S.activeToken], TOKENS[S.activeToken].decimals);
+
+  // обработчики
   document.getElementById('pctSlider').addEventListener('input', e => {
     S.pct = parseInt(e.target.value) || 1;
     document.getElementById('pctLabel').textContent = S.pct + '%';
@@ -568,16 +660,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('ordPrice').addEventListener('input', updatePreview);
 
-  document.getElementById('ordPrice').value = fmt(S.price[S.activeToken], TOKENS[S.activeToken].decimals);
-
+  updateSubmitLabel();
+  updatePreview();
   renderAll();
   renderLog();
 
-  setInterval(botTick, 1500);
-  setInterval(matchTick, 600);
+  // автоподстройка цены в поле, если не редактируется
   setInterval(() => {
-    document.getElementById('earnedInfo').textContent = `💵 ${fmt(S.earned, 2)} T`;
-  }, 1000);
+    const inp = document.getElementById('ordPrice');
+    if(document.activeElement !== inp){
+      inp.value = fmt(S.price[S.activeToken], TOKENS[S.activeToken].decimals);
+      updatePreview();
+    }
+  }, 4000);
+
+  setInterval(botTick, 1200);
+  setInterval(matchTick, 500);
+  setInterval(() => { if(!S.currentCandle[S.activeToken]) renderAll(); else renderAll(); }, 3000);
   window.addEventListener('resize', drawChart);
 });
 </script>
