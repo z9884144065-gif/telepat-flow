@@ -6,74 +6,68 @@
 <title>💱 P2P Автоматизация — ДЕМО</title>
 <style>
 :root{--bg:#0b1018;--card:#141c28;--line:#39475b;--gold:#f4cf70;--text:#fff;--muted:#9da9b9;--green:#39d98a;--red:#ff647c;--blue:#4f8cff}
-*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#26334a 0,#0b1018 42%),#0b1018;color:var(--text);font-family:Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 50% -10%,#26334a 0,#0b1018 42%),#0b1018;color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
 .app{max-width:600px;margin:auto;padding:14px 12px 30px}
-h1{text-align:center;color:var(--gold);margin:6px 0 2px;font-size:22px}
-.sub{text-align:center;color:var(--muted);font-size:12px;margin-bottom:14px}
-.card{background:linear-gradient(145deg,#1b2636,#111925);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:11px;box-shadow:0 10px 24px #0006}
+h1{text-align:center;color:var(--gold);margin:6px 0 2px;font-size:20px}
+.sub{text-align:center;color:var(--muted);font-size:11px;margin-bottom:12px}
+.card{background:linear-gradient(145deg,#1b2636,#111925);border:1px solid var(--line);border-radius:16px;padding:13px;margin-bottom:10px;box-shadow:0 8px 20px #0006}
 .card.gold{border-color:#80652b}
-.title{color:var(--gold);font-size:13px;font-weight:bold;letter-spacing:.6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-button{padding:13px;border-radius:13px;border:0;background:linear-gradient(135deg,#f5d477,#c99629);color:#17120a;font-weight:bold;font-size:15px;cursor:pointer}
-button.ok{background:linear-gradient(135deg,#39d98a,#2ba86a);color:#0d280d;width:100%}
+.title{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:.6px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+button{padding:11px;border-radius:11px;border:0;background:linear-gradient(135deg,#f5d477,#c99629);color:#17120a;font-weight:bold;font-size:14px;cursor:pointer}
+button.ok{background:linear-gradient(135deg,#39d98a,#2ba86a);color:#0d280d;width:100%;padding:13px}
 button:disabled{opacity:.4;cursor:not-allowed}
-input{width:100%;padding:11px;border-radius:12px;border:1px solid #45536a;background:#0d1520;color:#fff;font-size:15px;outline:none}
+input[type=number]{width:100%;padding:10px;border-radius:11px;border:1px solid #45536a;background:#0d1520;color:#fff;font-size:14px;outline:none}
+input[type=range]{width:100%;margin:8px 0;accent-color:#f4cf70;height:6px}
 label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8px}
-.info{color:var(--muted);font-size:12px;line-height:1.45}
-.ok{color:var(--green)}.er{color:var(--red)}.gold{color:var(--gold)}.blue{color:var(--blue)}
-
-/* Курс */
-.price-wrap{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:4px 0}
-.price-big{font-size:48px;font-weight:bold;color:#fff;line-height:1;letter-spacing:-1.5px;transition:color .3s}
-.price-big.up{color:#39d98a;text-shadow:0 0 24px #39d98a88}
-.price-unit{color:#8f9bab;font-size:16px}
-.price-meta{display:flex;justify-content:space-between;font-size:12px;padding:0 6px;margin-top:4px}
-
-/* Стат */
-.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.stat{background:#0d1520;border:1px solid #2d3a4c;border-radius:12px;padding:10px;text-align:center}
-.stat b{display:block;font-size:18px;color:#fff;margin-top:2px;line-height:1.1}
-.stat span{color:#8f9bab;font-size:10px;letter-spacing:.4px}
-.stat.g b{color:#39d98a}
-.prof-name{font-size:15px;font-weight:bold;color:var(--gold);text-align:center;margin-bottom:10px}
-
-/* Форма ордера */
-.side-toggle{display:flex;gap:6px;margin-bottom:8px}
-.side-btn{flex:1;padding:11px;font-size:12px;font-weight:bold;border-radius:12px;border:1px solid #45536a;background:#0d1520;color:#9da9b9;cursor:pointer;transition:.15s}
-.side-btn.buy.active{background:linear-gradient(145deg,#1f4a2f,#0d2818);color:#39d98a;border-color:#39d98a;box-shadow:0 0 14px #39d98a55}
-.side-btn.sell.active{background:linear-gradient(145deg,#4a1f2f,#280d18);color:#ff647c;border-color:#ff647c;box-shadow:0 0 14px #ff647c55}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.preview{background:#0d1520;border:1px solid #303d50;border-radius:12px;padding:10px;text-align:center;font-size:13px;color:#8f9bab;margin:10px 0}
-.preview b{color:#f4cf70;font-size:15px}
-
-/* Книга */
-.book-head{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
-.bh{font-size:11px;font-weight:bold;letter-spacing:.6px;padding:6px;border-radius:8px;text-align:center}
+.info{color:var(--muted);font-size:11px;line-height:1.4}
+.ok{color:var(--green)}.er{color:var(--red)}.gold{color:var(--gold)}
+.tabs{display:flex;gap:5px;margin-bottom:8px}
+.tab{flex:1;padding:8px 4px;border-radius:10px;background:#0d1520;border:1px solid #2d3a4c;color:#9da9b9;font-size:12px;font-weight:bold;cursor:pointer;text-align:center;transition:.15s}
+.tab.active{background:linear-gradient(145deg,#2a2415,#1a160d);border-color:var(--gold);color:var(--gold);box-shadow:0 0 10px #f4cf7044}
+.price-wrap{display:flex;align-items:baseline;justify-content:center;gap:6px;margin:4px 0}
+.price-big{font-size:36px;font-weight:bold;color:#fff;line-height:1;letter-spacing:-1px;transition:color .3s}
+.price-big.up{color:#39d98a;text-shadow:0 0 20px #39d98a88}
+.price-big.down{color:#ff647c;text-shadow:0 0 20px #ff647c88}
+.price-unit{color:#8f9bab;font-size:14px}
+.price-meta{display:flex;justify-content:space-between;font-size:11px;padding:0 4px;margin-bottom:8px}
+#chart{display:block;width:100%;height:120px;border-radius:10px;background:#0d1520;border:1px solid #2d3a4c}
+.bal-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.bal{background:#0d1520;border:1px solid #2d3a4c;border-radius:11px;padding:10px}
+.bal span{font-size:11px;color:#8f9bab;display:block}
+.bal b{font-size:16px;color:#fff;display:block;margin-top:3px}
+.bal.gold{border-color:#66572e;background:linear-gradient(145deg,#25200e,#14110a)}
+.bal.gold b{color:var(--gold)}
+.side-toggle{display:flex;gap:6px;margin-bottom:6px}
+.side-btn{flex:1;padding:11px;font-size:12px;font-weight:bold;border-radius:11px;border:1px solid #45536a;background:#0d1520;color:#9da9b9;cursor:pointer;transition:.15s}
+.side-btn.buy.active{background:linear-gradient(145deg,#1f4a2f,#0d2818);color:#39d98a;border-color:#39d98a;box-shadow:0 0 12px #39d98a55}
+.side-btn.sell.active{background:linear-gradient(145deg,#4a1f2f,#280d18);color:#ff647c;border-color:#ff647c;box-shadow:0 0 12px #ff647c55}
+.quick-pcts{display:flex;gap:5px;margin-top:6px}
+.quick-pcts button{flex:1;padding:7px 4px;font-size:11px;background:#1b2636;color:#cfd8e4;border:1px solid #3a4658;border-radius:8px}
+.preview{background:#0d1520;border:1px solid #303d50;border-radius:11px;padding:10px;margin:10px 0;font-size:12px}
+.preview>div{display:flex;justify-content:space-between;padding:3px 0}
+.preview b{color:#f4cf70;font-size:14px}
+.book-head{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:5px}
+.bh{font-size:11px;font-weight:bold;letter-spacing:.5px;padding:5px;border-radius:7px;text-align:center}
 .bh.sell{background:#4a1f2f;color:#ff647c}
 .bh.buy{background:#1f4a2f;color:#39d98a}
-.book{display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:220px;max-height:340px}
-.col{display:flex;flex-direction:column;gap:4px;overflow-y:auto}
-.empty{color:#4a596d;text-align:center;font-size:11px;padding:20px 6px;grid-column:1/-1}
-.order{position:relative;padding:7px 9px;border-radius:9px;font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:6px;border:1px solid transparent;transition:opacity .3s, transform .2s}
+.book{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:280px}
+.col{display:flex;flex-direction:column;gap:3px;overflow-y:auto;min-height:100px}
+.empty{color:#4a596d;text-align:center;font-size:10px;padding:20px 4px}
+.order{padding:6px 8px;border-radius:8px;font-size:10px;display:flex;justify-content:space-between;align-items:center;gap:5px;border:1px solid transparent;position:relative}
 .order.sell{background:linear-gradient(145deg,#2a1515,#1a0d0d);border-color:#4a2424;color:#ffb3b3}
 .order.buy{background:linear-gradient(145deg,#152a1f,#0d1a13);border-color:#244a34;color:#a8e6b9}
-.order.mine{border-color:var(--gold);box-shadow:0 0 10px #f4cf7055}
+.order.mine{border-color:var(--gold);box-shadow:0 0 8px #f4cf7055}
 .order .l{flex:1;min-width:0}
-.order .p{font-weight:bold;font-size:12px}
-.order .a{font-size:10px;color:#8f9bab;margin-top:1px}
-.order .x{cursor:pointer;color:#8f9bab;font-weight:bold;font-size:14px;padding:0 4px}
-.order .x:hover{color:#ff647c}
-.order.flash{animation:flashSell .4s}
-@keyframes flashSell{0%{background:#39d98a;color:#000}100%{background:transparent}}
-
-/* Лог */
-.log-list{display:flex;flex-direction:column;gap:3px;max-height:180px;overflow-y:auto;font-size:11px}
-.log-line{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1a2534}
+.order .p{font-weight:bold;font-size:11px}
+.order .a{font-size:9px;color:#8f9bab;margin-top:1px}
+.order .x{cursor:pointer;color:#8f9bab;font-size:12px;padding:0 3px}
+.log-list{display:flex;flex-direction:column;gap:2px;max-height:170px;overflow-y:auto;font-size:10px}
+.log-line{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #1a2534}
 .log-line:last-child{border:0}
-.log-line .tm{color:#7f8c9f;margin-right:6px}
-
-.toast{position:fixed;left:12px;right:12px;top:12px;z-index:4000;padding:12px;border-radius:12px;background:#1b2737;border:1px solid #4c5b70;text-align:center;font-size:13px;display:none}
-.toast.show{display:block;animation:fadeIn .25s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.log-line .tm{color:#7f8c9f;margin-right:5px;flex-shrink:0}
+.toast{position:fixed;left:12px;right:12px;top:12px;z-index:4000;padding:11px;border-radius:11px;background:#1b2737;border:1px solid #4c5b70;text-align:center;font-size:12px;display:none}
+.toast.show{display:block;animation:fi .25s}
+@keyframes fi{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -81,59 +75,62 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
 
 <div class="app">
   <h1>💱 P2P АВТОМАТИЗАЦИЯ</h1>
-  <div class="sub">ДЕМО • Телепат • Живой рынок</div>
+  <div class="sub">ДЕМО • Живой рынок • Курс растёт от покупок</div>
 
-  <!-- КУРС -->
   <div class="card gold">
-    <div class="title">📈 КУРС TG → TUSD</div>
+    <div class="title">📈 КУРС</div>
+    <div class="tabs">
+      <button class="tab active" data-token="TG">🥇 TG</button>
+      <button class="tab" data-token="AI">🤖 AI</button>
+      <button class="tab" data-token="VK">🎮 VK</button>
+    </div>
     <div class="price-wrap">
-      <div class="price-big" id="priceDisplay">100.00</div>
+      <div class="price-big" id="priceBig">100.00</div>
       <div class="price-unit">TUSD</div>
     </div>
     <div class="price-meta">
-      <span class="ok">▲ +1.0% / день</span>
-      <span class="info">До роста: <b id="growthTimer">30</b> сек</span>
+      <span id="startChange" class="info">от старта: 0%</span>
+      <span id="earnedInfo" class="ok">💵 0.00 T</span>
     </div>
+    <canvas id="chart" height="120"></canvas>
   </div>
 
-  <!-- ПРОФИЛЬ -->
-  <div class="card gold">
-    <div class="title">👤 ПРОФИЛЬ</div>
-    <div class="prof-name" id="profName">Крестьянин</div>
-    <div class="stats">
-      <div class="stat"><span>TG</span><b id="balTG">100</b></div>
-      <div class="stat"><span>TUSD</span><b id="balUSD">1000</b></div>
-      <div class="stat g"><span>ЗАРАБОТАНО</span><b id="earned">0.00</b></div>
-    </div>
-    <div class="info" style="text-align:center;margin-top:8px">
-      Комиссия: <b id="commRate" style="color:#f4cf70">1.0%</b> • Макс. ордер: <b id="maxOrd" style="color:#4f8cff">10</b> $
-    </div>
-  </div>
-
-  <!-- НОВЫЙ ОРДЕР -->
   <div class="card">
-    <div class="title">📝 НОВЫЙ ОРДЕР</div>
+    <div class="title">💰 БАЛАНС</div>
+    <div class="bal-grid">
+      <div class="bal"><span>🥇 TG</span><b id="balTG">10</b></div>
+      <div class="bal"><span>🤖 AI</span><b id="balAI">50K</b></div>
+      <div class="bal"><span>🎮 VK</span><b id="balVK">500</b></div>
+      <div class="bal gold"><span>💵 TUSD</span><b id="balTUSD">5000.00</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="title">📝 НОВЫЙ ОРДЕР • <span id="tokenLabel">🥇 TG</span></div>
     <div class="side-toggle">
-      <button id="btnBuy" class="side-btn buy active" onclick="setSide('buy')">🟩 КУПИТЬ TG</button>
-      <button id="btnSell" class="side-btn sell" onclick="setSide('sell')">🟥 ПРОДАТЬ TG</button>
+      <button id="btnBuy" class="side-btn buy active" onclick="setSide('buy')">🟩 КУПИТЬ</button>
+      <button id="btnSell" class="side-btn sell" onclick="setSide('sell')">🟥 ПРОДАТЬ</button>
     </div>
-    <div class="grid2">
-      <div>
-        <label>Цена за 1 TG</label>
-        <input id="ordPrice" type="number" step="0.01" value="100">
-      </div>
-      <div>
-        <label>Кол-во TG</label>
-        <input id="ordAmount" type="number" step="1" value="5" min="1">
-      </div>
+    <label>Цена за 1 <span id="unitLabel">TG</span> (TUSD)</label>
+    <input id="ordPrice" type="number" step="0.000001" value="100">
+    <label>Объём: <b id="pctLabel" style="color:#f4cf70">25%</b></label>
+    <input id="pctSlider" type="range" min="1" max="100" value="25" step="1">
+    <div class="quick-pcts">
+      <button onclick="setPct(10)">10%</button>
+      <button onclick="setPct(25)">25%</button>
+      <button onclick="setPct(50)">50%</button>
+      <button onclick="setPct(75)">75%</button>
+      <button onclick="setPct(100)">100%</button>
     </div>
-    <div class="preview">Итого: <b id="ordTotal">500.00</b> TUSD</div>
-    <button class="ok" id="submitBtn" onclick="submitOrder()">🚀 РАЗМЕСТИТЬ ОРДЕР</button>
+    <div class="preview">
+      <div><span>Кол-во:</span><b id="ordAmountDisp">—</b></div>
+      <div><span>Сумма:</span><b id="ordTotalDisp">—</b></div>
+    </div>
+    <button class="ok" onclick="submitOrder()">🚀 РАЗМЕСТИТЬ ОРДЕР</button>
   </div>
 
-  <!-- КНИГА -->
   <div class="card">
-    <div class="title">📖 КНИГА ОРДЕРОВ<span class="info" style="font-size:11px">● Live</span></div>
+    <div class="title">📖 КНИГА ОРДЕРОВ<span class="info" style="font-size:10px">● live</span></div>
     <div class="book-head">
       <div class="bh sell">SELL 🟥</div>
       <div class="bh buy">BUY 🟩</div>
@@ -144,43 +141,45 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
     </div>
   </div>
 
-  <!-- ЛОГ -->
   <div class="card">
     <div class="title">⚡ ЛЕНТА СДЕЛОК</div>
-    <div id="logList" class="log-list"><div class="info" style="text-align:center;padding:10px">Ждём первых сделок…</div></div>
+    <div id="logList" class="log-list"><div class="info" style="text-align:center;padding:10px">Ждём сделок…</div></div>
   </div>
 </div>
 
 <script>
-/* ============== ДАННЫЕ ============== */
-const RANKS = ['Крестьянин','Вольный','Гражданин','Оруженосец','Мечник','Десятник','Сотник','Тысячник','Рыцарь','Железный рыцарь','Бронзовый рыцарь','Серебряный рыцарь','Золотой рыцарь','Барон','Виконт','Граф','Маркиз','Герцог','Князь','Король','Император'];
-const MAX_ORDER = [10,23,44,80,145,265,480,870,1580,2870,5200,9450,17200,31200,56700,103000,187000,340000,618000,1123000,2040000];
-const BOT_NAMES = ['Вася','Петя','Иван','Маша','Олег','Коля','Аня','Дима','Катя','Саша','Лена','Гриша'];
+/* ================= КОНФИГ ================= */
+const TOKENS = {
+  TG: { decimals: 2, start: 100 },
+  AI: { decimals: 4, start: 0.01 },
+  VK: { decimals: 2, start: 2 },
+};
+const BOT_NAMES = ['Вася','Петя','Иван','Маша','Олег','Коля','Аня','Дима','Катя','Саша','Лена','Гриша','Толя','Юля'];
+const PRICE_UP = 1.01;
+const PRICE_DOWN = 0.995;
 
-/* ============== СОСТОЯНИЕ ============== */
+/* ================= СОСТОЯНИЕ ================= */
 const S = {
-  level: 1,
-  price: 100,
-  nextGrowthAt: Date.now() + 30000,
-  balTG: 100,
-  balUSD: 1000,
-  earned: 0,
-  myFilled: 0,
+  price: { TG: 100, AI: 0.01, VK: 2 },
+  startPrice: { TG: 100, AI: 0.01, VK: 2 },
+  history: { TG: [100], AI: [0.01], VK: [2] },
+  bal: { TG: 10, AI: 50000, VK: 500, TUSD: 5000 },
   orders: [],
   log: [],
+  activeToken: 'TG',
   side: 'buy',
+  pct: 25,
+  earned: 0,
 };
 
-/* ============== УТИЛИТЫ ============== */
-function limitOf(lvl){ return 9 + lvl; }
-function rateOf(lvl){ return (9 + lvl) / 10; }
-function maxOrderOf(lvl){ return MAX_ORDER[Math.min(20, Math.max(0, lvl - 1))]; }
+/* ================= УТИЛИТЫ ================= */
+function uid(){ return 'o' + Math.random().toString(36).slice(2,10); }
 function fmt(v, d=2){ return Number(v).toFixed(d); }
 function fmtBig(v){
   const n = Number(v);
   if(n >= 1e6) return (n/1e6).toFixed(2).replace(/\.?0+$/,'') + 'M';
   if(n >= 1e3) return (n/1e3).toFixed(1).replace(/\.?0+$/,'') + 'K';
-  return String(Math.round(n*100)/100);
+  return String(Math.round(n*10000)/10000);
 }
 function toast(t, ok=false){
   const el = document.getElementById('toast');
@@ -188,82 +187,8 @@ function toast(t, ok=false){
   el.style.borderColor = ok ? '#397b5b' : '#4c5b70';
   el.classList.add('show');
   clearTimeout(el._t);
-  el._t = setTimeout(()=>el.classList.remove('show'), 2000);
+  el._t = setTimeout(()=>el.classList.remove('show'), 1900);
 }
-function uid(){ return 'o' + Math.random().toString(36).slice(2, 10); }
-
-/* ============== БОТЫ (другие игроки) ============== */
-function botOrder(){
-  const side = Math.random() < 0.5 ? 'buy' : 'sell';
-  const mid = S.price;
-  let price;
-  if(side === 'sell') price = mid * (1 + Math.random() * 0.04);      // продают дороже
-  else                price = mid * (1 - Math.random() * 0.04);      // покупают дешевле
-  price = Math.round(price * 100) / 100;
-  const amount = 1 + Math.floor(Math.random() * Math.min(50, maxOrderOf(S.level) * 2));
-  S.orders.push({
-    id: uid(), side, price, amount, filled: 0,
-    owner: BOT_NAMES[Math.floor(Math.random() * BOT_NAMES.length)],
-    mine: false, ts: Date.now(),
-  });
-}
-
-function initBots(){
-  for(let i = 0; i < 6; i++) botOrder();
-}
-
-/* ============== МАТЧИНГ ============== */
-function matchAll(){
-  const eps = 0.001;
-  const sells = S.orders.filter(o => o.side === 'sell' && o.filled < o.amount - eps).sort((a,b) => a.price - b.price || a.ts - b.ts);
-  const buys  = S.orders.filter(o => o.side === 'buy'  && o.filled < o.amount - eps).sort((a,b) => b.price - a.price || a.ts - b.ts);
-
-  let si = 0, bi = 0;
-  let anyTrade = false;
-
-  while(si < sells.length && bi < buys.length){
-    const s = sells[si];
-    const b = buys[bi];
-    if(s.price > b.price + eps) break;
-
-    const sRem = s.amount - s.filled;
-    const bRem = b.amount - b.filled;
-    const vol = Math.min(sRem, bRem);
-    if(vol <= eps) { si++; bi++; continue; }
-
-    // Сделка по цене продавца (кто раньше поставил — тот и определил цену)
-    const dealPrice = s.price;
-    const usd = vol * dealPrice;
-
-    // Обновляем балансы, если участвует игрок
-    if(s.mine){ S.balTG -= vol; S.balUSD += usd; }
-    if(b.mine){ S.balUSD -= usd; S.balTG += vol; }
-
-    // Комиссия игрока (платформа) со сделки
-    const comm = usd * rateOf(S.level) / 100;
-    S.earned += comm;
-    if(s.mine || b.mine) S.myFilled += vol;
-
-    s.filled += vol;
-    b.filled += vol;
-
-    pushLog(`💥 ${s.mine?'🧑 ':'🤖 '}${s.owner} → ${b.mine?'🧑 ':'🤖 '}${b.owner}: ${fmtBig(vol)} TG × ${fmt(dealPrice,2)} = ${fmt(usd,2)} T (комиссия +${fmt(comm,4)})`);
-    anyTrade = true;
-
-    if(s.filled >= s.amount - eps) si++;
-    if(b.filled >= b.amount - eps) bi++;
-  }
-
-  // Убираем полностью исполненные
-  S.orders = S.orders.filter(o => o.filled < o.amount - eps);
-
-  // Ограничим размер книги
-  if(S.orders.length > 200) S.orders = S.orders.slice(-200);
-
-  if(anyTrade) renderAll();
-}
-
-/* ============== ЛОГ ============== */
 function pushLog(txt){
   const time = new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   S.log.unshift({t:time, txt});
@@ -271,96 +196,331 @@ function pushLog(txt){
   renderLog();
 }
 
-/* ============== РЕНДЕР ============== */
+/* ================= БОТЫ ================= */
+function botOrder(token){
+  const mid = S.price[token];
+  const side = Math.random() < 0.5 ? 'buy' : 'sell';
+  let price;
+  if(side === 'sell') price = mid * (1.01 + Math.random() * 0.03);
+  else                price = mid * (0.97 + Math.random() * 0.02);
+  if(Math.random() < 0.15) price = mid * (1 + (Math.random() - 0.5) * 0.008);
+
+  const d = TOKENS[token].decimals;
+  price = Math.round(price * Math.pow(10, d)) / Math.pow(10, d);
+
+  const maxVol = token === 'AI' ? 5000 : (token === 'VK' ? 100 : 20);
+  const amount = 1 + Math.floor(Math.random() * maxVol);
+
+  S.orders.push({
+    id: uid(), side, price, amount, filled: 0, token,
+    owner: BOT_NAMES[Math.floor(Math.random() * BOT_NAMES.length)],
+    mine: false, ts: Date.now(),
+  });
+}
+
+function initBots(){
+  for(const t of Object.keys(TOKENS)){
+    for(let i = 0; i < 5; i++) botOrder(t);
+  }
+}
+
+/* ================= МАТЧИНГ ================= */
+function matchAll(){
+  let anyTrade = false;
+  const eps = 1e-9;
+
+  for(const token of Object.keys(TOKENS)){
+    let safety = 200;
+    while(safety-- > 0){
+      const sells = S.orders.filter(o => o.token === token && o.side === 'sell' && o.filled < o.amount - eps)
+                            .sort((a,b) => a.price - b.price || a.ts - b.ts);
+      const buys  = S.orders.filter(o => o.token === token && o.side === 'buy'  && o.filled < o.amount - eps)
+                            .sort((a,b) => b.price - a.price || a.ts - b.ts);
+      if(!sells.length || !buys.length) break;
+      const s = sells[0], b = buys[0];
+      if(s.price > b.price + eps) break;
+
+      const sRem = s.amount - s.filled;
+      const bRem = b.amount - b.filled;
+      const vol = Math.min(sRem, bRem);
+      const dealPrice = s.price;
+      const usd = vol * dealPrice;
+
+      if(s.mine){ S.bal[token] -= vol; S.bal.TUSD += usd; }
+      if(b.mine){ S.bal.TUSD -= usd; S.bal[token] += vol; }
+
+      S.earned += usd * 0.01;
+
+      s.filled += vol;
+      b.filled += vol;
+
+      pushLog(`💥 ${s.mine?'🧑':'🤖'}${s.owner} → ${b.mine?'🧑':'🤖'}${b.owner}: ${fmtBig(vol)} ${token} × ${fmt(dealPrice, TOKENS[token].decimals)} = ${fmt(usd,2)} T`);
+      anyTrade = true;
+    }
+  }
+
+  S.orders = S.orders.filter(o => o.filled < o.amount - eps);
+  if(S.orders.length > 300) S.orders = S.orders.slice(-300);
+
+  return anyTrade;
+}
+
+/* ================= ЦЕНА ================= */
+function bumpPrice(token, mult){
+  S.price[token] *= mult;
+  S.history[token].push(S.price[token]);
+  if(S.history[token].length > 60) S.history[token].shift();
+
+  if(token === S.activeToken){
+    const el = document.getElementById('priceBig');
+    el.classList.remove('up','down');
+    el.classList.add(mult > 1 ? 'up' : 'down');
+    setTimeout(() => el.classList.remove('up','down'), 800);
+  }
+}
+
+/* ================= ГРАФИК ================= */
+function drawChart(){
+  const canvas = document.getElementById('chart');
+  if(!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth || 340;
+  const H = 120;
+  if(canvas.width !== W*dpr || canvas.height !== H*dpr){
+    canvas.width = W*dpr;
+    canvas.height = H*dpr;
+    canvas.style.height = H + 'px';
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,H);
+
+  const data = S.history[S.activeToken];
+  const decimals = TOKENS[S.activeToken].decimals;
+
+  if(!data || data.length < 2){
+    ctx.fillStyle = '#4a596d';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('Мало данных — сделай сделку', W/2, H/2);
+    return;
+  }
+
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const range = (max - min) || (max * 0.02) || 1;
+  const padT = 14, padB = 18, padL = 8, padR = 8;
+  const plotH = H - padT - padB;
+  const plotW = W - padL - padR;
+  const stepX = plotW / Math.max(1, data.length - 1);
+  const X = i => padL + i * stepX;
+  const Y = v => padT + plotH - ((v - min) / range) * plotH;
+
+  ctx.strokeStyle = '#1f2a3b';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([2,4]);
+  [min, (min+max)/2, max].forEach(v => {
+    ctx.beginPath();
+    ctx.moveTo(padL, Y(v));
+    ctx.lineTo(W - padR, Y(v));
+    ctx.stroke();
+  });
+  ctx.setLineDash([]);
+
+  const isUp = data[data.length-1] >= data[0];
+  const color = isUp ? '#39d98a' : '#ff647c';
+
+  const grad = ctx.createLinearGradient(0, padT, 0, H - padB);
+  grad.addColorStop(0, color + '66');
+  grad.addColorStop(1, color + '00');
+  ctx.beginPath();
+  ctx.moveTo(X(0), Y(data[0]));
+  data.forEach((v,i) => ctx.lineTo(X(i), Y(v)));
+  ctx.lineTo(X(data.length-1), H - padB);
+  ctx.lineTo(X(0), H - padB);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(X(0), Y(data[0]));
+  data.forEach((v,i) => ctx.lineTo(X(i), Y(v)));
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+
+  const lx = X(data.length-1), ly = Y(data[data.length-1]);
+  ctx.beginPath();
+  ctx.arc(lx, ly, 5, 0, Math.PI*2);
+  ctx.fillStyle = color + '55';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(lx, ly, 2.5, 0, Math.PI*2);
+  ctx.fillStyle = color;
+  ctx.fill();
+
+  ctx.fillStyle = '#7f8c9f';
+  ctx.font = '9px Arial';
+  ctx.textAlign = 'left';
+  ctx.fillText(fmt(max, decimals), padL + 2, padT + 8);
+  ctx.fillText(fmt(min, decimals), padL + 2, H - padB - 3);
+  ctx.textAlign = 'right';
+  ctx.fillText(data.length + ' точек', W - padR - 2, H - padB - 3);
+}
+
+/* ================= РЕНДЕР ================= */
 function renderTop(){
-  document.getElementById('balTG').textContent = fmtBig(S.balTG);
-  document.getElementById('balUSD').textContent = fmtBig(S.balUSD);
-  document.getElementById('earned').textContent = fmt(S.earned, 2);
-  document.getElementById('profName').textContent = RANKS[S.level-1];
-  document.getElementById('commRate').textContent = rateOf(S.level).toFixed(1) + '%';
-  document.getElementById('maxOrd').textContent = fmtBig(maxOrderOf(S.level));
-  document.getElementById('priceDisplay').textContent = fmt(S.price, 2);
+  document.getElementById('balTG').textContent = fmtBig(S.bal.TG);
+  document.getElementById('balAI').textContent = fmtBig(S.bal.AI);
+  document.getElementById('balVK').textContent = fmtBig(S.bal.VK);
+  document.getElementById('balTUSD').textContent = fmt(S.bal.TUSD, 2);
+
+  document.getElementById('tokenLabel').textContent = TOKENS[S.activeToken] ? '' : '';
+  document.getElementById('tokenLabel').textContent = document.querySelector(`.tab[data-token="${S.activeToken}"]`).textContent;
+  document.getElementById('unitLabel').textContent = S.activeToken;
+  document.getElementById('priceBig').textContent = fmt(S.price[S.activeToken], TOKENS[S.activeToken].decimals);
+
+  const chg = (S.price[S.activeToken] / S.startPrice[S.activeToken] - 1) * 100;
+  const chgEl = document.getElementById('startChange');
+  chgEl.textContent = `от старта: ${chg >= 0 ? '+' : ''}${chg.toFixed(2)}%`;
+  chgEl.className = chg >= 0 ? 'ok' : 'er';
+
+  document.getElementById('earnedInfo').textContent = `💵 ${fmt(S.earned, 2)} T`;
+
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.token === S.activeToken);
+  });
+
+  document.getElementById('pctLabel').textContent = S.pct + '%';
+  document.getElementById('pctSlider').value = S.pct;
+
+  drawChart();
+  updatePreview();
 }
 
 function renderBook(){
-  const eps = 0.001;
-  const sells = S.orders.filter(o => o.side === 'sell' && o.filled < o.amount - eps).sort((a,b) => a.price - b.price || a.ts - b.ts).slice(0, 25);
-  const buys  = S.orders.filter(o => o.side === 'buy'  && o.filled < o.amount - eps).sort((a,b) => b.price - a.price || a.ts - b.ts).slice(0, 25);
+  const token = S.activeToken;
+  const eps = 1e-9;
+  const sells = S.orders.filter(o => o.token === token && o.side === 'sell' && o.filled < o.amount - eps)
+                        .sort((a,b) => a.price - b.price || a.ts - b.ts).slice(0, 25);
+  const buys  = S.orders.filter(o => o.token === token && o.side === 'buy'  && o.filled < o.amount - eps)
+                        .sort((a,b) => b.price - a.price || a.ts - b.ts).slice(0, 25);
 
   const sb = document.getElementById('sellBook');
   const bb = document.getElementById('buyBook');
+  const d = TOKENS[token].decimals;
 
   sb.innerHTML = sells.length ? sells.map(o => `
     <div class="order sell ${o.mine?'mine':''}">
       <div class="l">
-        <div class="p">${fmt(o.price,2)} $</div>
-        <div class="a">${fmtBig(o.amount - o.filled)} TG • ${o.mine?'🧑 вы':o.owner}</div>
+        <div class="p">${fmt(o.price, d)}</div>
+        <div class="a">${fmtBig(o.amount - o.filled)} ${token} • ${o.mine?'вы':o.owner}</div>
       </div>
       ${o.mine ? `<span class="x" onclick="cancelOrder('${o.id}')">✕</span>` : ''}
-    </div>`).join('') : '<div class="empty">Нет ордеров</div>';
+    </div>`).join('') : '<div class="empty">Нет продавцов</div>';
 
   bb.innerHTML = buys.length ? buys.map(o => `
     <div class="order buy ${o.mine?'mine':''}">
       <div class="l">
-        <div class="p">${fmt(o.price,2)} $</div>
-        <div class="a">${fmtBig(o.amount - o.filled)} TG • ${o.mine?'🧑 вы':o.owner}</div>
+        <div class="p">${fmt(o.price, d)}</div>
+        <div class="a">${fmtBig(o.amount - o.filled)} ${token} • ${o.mine?'вы':o.owner}</div>
       </div>
       ${o.mine ? `<span class="x" onclick="cancelOrder('${o.id}')">✕</span>` : ''}
-    </div>`).join('') : '<div class="empty">Нет ордеров</div>';
+    </div>`).join('') : '<div class="empty">Нет покупателей</div>';
 }
 
 function renderLog(){
   const el = document.getElementById('logList');
-  if(!S.log.length){ el.innerHTML = '<div class="info" style="text-align:center;padding:10px">Ждём первых сделок…</div>'; return; }
+  if(!S.log.length){ el.innerHTML = '<div class="info" style="text-align:center;padding:10px">Ждём сделок…</div>'; return; }
   el.innerHTML = S.log.map(l => `<div class="log-line"><span class="tm">[${l.t}]</span><span style="flex:1;text-align:right">${l.txt}</span></div>`).join('');
 }
 
-function renderAll(){ renderTop(); renderBook(); }
+function renderAll(){
+  renderTop();
+  renderBook();
+}
 
-/* ============== ФОРМА ОРДЕРА ============== */
+/* ================= ФОРМА ================= */
+function setToken(t){
+  S.activeToken = t;
+  const inp = document.getElementById('ordPrice');
+  inp.value = fmt(S.price[t], TOKENS[t].decimals);
+  renderTop();
+  renderBook();
+}
+
 function setSide(s){
   S.side = s;
   document.getElementById('btnBuy').classList.toggle('active', s === 'buy');
   document.getElementById('btnSell').classList.toggle('active', s === 'sell');
   updatePreview();
 }
-function updatePreview(){
-  const p = parseFloat(document.getElementById('ordPrice').value) || 0;
-  const a = parseFloat(document.getElementById('ordAmount').value) || 0;
-  document.getElementById('ordTotal').textContent = fmt(p * a, 2);
+
+function setPct(p){
+  S.pct = Math.max(1, Math.min(100, p));
+  renderTop();
 }
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('ordPrice').addEventListener('input', updatePreview);
-  document.getElementById('ordAmount').addEventListener('input', updatePreview);
-});
 
-function submitOrder(){
-  const price = parseFloat(document.getElementById('ordPrice').value);
-  const amount = parseFloat(document.getElementById('ordAmount').value);
-  if(!Number.isFinite(price) || price <= 0){ toast('Некорректная цена', false); return; }
-  if(!Number.isFinite(amount) || amount <= 0){ toast('Некорректное количество', false); return; }
-
-  const usd = price * amount;
-  if(usd > maxOrderOf(S.level) * 5){ // не больше 5× от лимита — анти-чит
-    toast(`Ордер слишком большой для ${RANKS[S.level-1]}`, false);
-    return;
-  }
+function computeOrder(){
+  const token = S.activeToken;
+  const price = parseFloat(document.getElementById('ordPrice').value) || S.price[token];
+  const pct = S.pct / 100;
 
   if(S.side === 'buy'){
-    if(S.balUSD < usd){ toast(`Мало TUSD: нужно ${fmt(usd,2)}`, false); return; }
+    const availUSD = S.bal.TUSD;
+    const usd = availUSD * pct;
+    const amount = usd / price;
+    return { token, price, amount, usd };
   } else {
-    if(S.balTG < amount){ toast(`Мало TG: нужно ${fmtBig(amount)}`, false); return; }
+    const availTok = S.bal[token];
+    const amount = availTok * pct;
+    const usd = amount * price;
+    return { token, price, amount, usd };
+  }
+}
+
+function updatePreview(){
+  const { token, amount, usd } = computeOrder();
+  document.getElementById('ordAmountDisp').textContent = fmtBig(amount) + ' ' + token;
+  document.getElementById('ordTotalDisp').textContent = fmt(usd, 2) + ' TUSD';
+}
+
+/* ================= ОРДЕР ================= */
+function submitOrder(){
+  const token = S.activeToken;
+  const inp = document.getElementById('ordPrice');
+  const price = parseFloat(inp.value);
+  if(!Number.isFinite(price) || price <= 0){ toast('Некорректная цена'); return; }
+
+  const { amount, usd } = computeOrder();
+  if(amount <= 0){ toast('Нулевой объём'); return; }
+
+  if(S.side === 'buy'){
+    if(usd > S.bal.TUSD + 1e-6){ toast(`Мало TUSD: нужно ${fmt(usd,2)}`); return; }
+  } else {
+    if(amount > S.bal[token] + 1e-6){ toast(`Мало ${token}: нужно ${fmt(amount, 4)}`); return; }
   }
 
-  S.orders.push({
-    id: uid(), side: S.side, price, amount, filled: 0,
+  const ord = {
+    id: uid(), side: S.side, price, amount, filled: 0, token,
     owner: 'вы', mine: true, ts: Date.now(),
-  });
-  pushLog(`📝 ${S.side === 'buy' ? '🟩' : '🟥'} Ваш ордер: ${fmtBig(amount)} TG × ${fmt(price,2)} $`);
-  toast('🚀 Ордер размещён', true);
+  };
+  S.orders.push(ord);
+
+  matchAll();
+  const didFill = ord.filled > 1e-9;
+
+  if(didFill){
+    bumpPrice(token, S.side === 'buy' ? PRICE_UP : PRICE_DOWN);
+    toast(S.side === 'buy' ? `🟩 Куплено • курс +1%` : `🟥 Продано • курс −0.5%`, true);
+  } else {
+    toast('📝 Ордер в книге — ждёт встречный');
+  }
+
+  pushLog(`📝 Вы: ${S.side === 'buy' ? '🟩 покупка' : '🟥 продажа'} ${fmtBig(amount)} ${token} × ${fmt(price, TOKENS[token].decimals)}`);
+
   renderAll();
-  // Немедленный матчинг
-  setTimeout(matchAll, 50);
 }
 
 function cancelOrder(id){
@@ -368,62 +528,49 @@ function cancelOrder(id){
   if(i < 0) return;
   const o = S.orders[i];
   S.orders.splice(i, 1);
-  pushLog(`✕ Отменён ордер: ${fmtBig(o.amount - o.filled)} TG × ${fmt(o.price,2)} $`);
+  pushLog(`✕ Отменён: ${fmtBig(o.amount - o.filled)} ${o.token} × ${fmt(o.price, TOKENS[o.token].decimals)}`);
   renderAll();
 }
 
-/* ============== РОСТ ЦЕНЫ ============== */
-function growPrice(){
-  const oldPrice = S.price;
-  S.price = S.price * 1.01; // +1%
-  S.nextGrowthAt = Date.now() + 30000;
-  pushLog(`📈 Курс TG: ${fmt(oldPrice,2)} → ${fmt(S.price,2)} $ (+1%)`);
-
-  const el = document.getElementById('priceDisplay');
-  el.classList.add('up');
-  setTimeout(() => el.classList.remove('up'), 1200);
-
-  renderTop();
+/* ================= ЦИКЛЫ ================= */
+function botTick(){
+  const tokens = Object.keys(TOKENS);
+  botOrder(tokens[Math.floor(Math.random()*tokens.length)]);
+  if(Math.random() < 0.5) botOrder(tokens[Math.floor(Math.random()*tokens.length)]);
+  renderBook();
 }
 
-function updateGrowthTimer(){
-  const left = Math.max(0, Math.ceil((S.nextGrowthAt - Date.now()) / 1000));
-  document.getElementById('growthTimer').textContent = left;
+function matchTick(){
+  const didMatch = matchAll();
+  if(didMatch) renderAll();
 }
 
-/* ============== ИНИЦИАЛИЗАЦИЯ ============== */
-let matchTimer, botTimer, growTimer, timerTick;
-
+/* ================= ИНИТ ================= */
 document.addEventListener('DOMContentLoaded', () => {
   initBots();
+  matchAll();
+
+  document.querySelectorAll('.tab').forEach(t => {
+    t.onclick = () => setToken(t.dataset.token);
+  });
+  document.getElementById('pctSlider').addEventListener('input', e => {
+    S.pct = parseInt(e.target.value) || 1;
+    document.getElementById('pctLabel').textContent = S.pct + '%';
+    updatePreview();
+  });
+  document.getElementById('ordPrice').addEventListener('input', updatePreview);
+
+  document.getElementById('ordPrice').value = fmt(S.price[S.activeToken], TOKENS[S.activeToken].decimals);
+
   renderAll();
   renderLog();
-  updatePreview();
-  updateGrowthTimer();
 
-  // Матчинг каждые 700 мс
-  matchTimer = setInterval(matchAll, 700);
-
-  // Боты добавляют ордера каждые ~3 сек
-  botTimer = setInterval(() => {
-    const n = 1 + Math.floor(Math.random() * 2);
-    for(let i = 0; i < n; i++) botOrder();
-    renderBook();
-  }, 3000);
-
-  // Рост цены раз в 30 сек
-  growTimer = setInterval(growPrice, 30000);
-
-  // Тик таймера роста
-  timerTick = setInterval(updateGrowthTimer, 500);
-
-  // Автоподстройка цены в форме под текущий курс
+  setInterval(botTick, 1500);
+  setInterval(matchTick, 600);
   setInterval(() => {
-    const inp = document.getElementById('ordPrice');
-    if(!inp || document.activeElement === inp) return;
-    inp.value = fmt(S.price, 2);
-    updatePreview();
-  }, 5000);
+    document.getElementById('earnedInfo').textContent = `💵 ${fmt(S.earned, 2)} T`;
+  }, 1000);
+  window.addEventListener('resize', drawChart);
 });
 </script>
 </body>
