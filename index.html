@@ -5,84 +5,272 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>💱 Trading • DEMO</title>
 <style>
-:root{--bg:#0b0e11;--card:#181a20;--border:#2b3139;--green:#0ecb81;--red:#f6465d;--text:#eaecef;--muted:#848e9c;--gold:#f0b90b;--blue:#4f8cff}
+:root{
+  --bg:#070b14;
+  --bg2:#0b1220;
+  --card1:#141d33;
+  --card2:#0d1421;
+  --border:#2a3552;
+  --border2:#3a4770;
+  --green:#0ecb81;
+  --red:#f6465d;
+  --text:#eef2f8;
+  --muted:#8a94ab;
+  --gold:#f0b90b;
+  --blue:#4f8cff;
+  --purple:#8b5cf6;
+}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:13px;min-height:100vh}
+html,body{
+  margin:0;
+  background:radial-gradient(circle at 50% -20%,#1a2444 0,#070b14 45%),#070b14;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+  font-size:13px;
+  min-height:100vh;
+}
 .app{max-width:600px;margin:auto;padding:8px 8px 24px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden}
+
+.card{
+  background:linear-gradient(155deg,var(--card1) 0%,var(--card2) 100%);
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-bottom:8px;
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.03);
+}
 
 /* TOP BAR */
-.topbar{padding:10px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:8px}
+.topbar{
+  background:linear-gradient(155deg,#1a2340,#0e1526);
+  border:1px solid var(--border2);
+  border-radius:12px;
+  padding:11px 13px;
+  margin-bottom:8px;
+  box-shadow:0 6px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(120,150,255,.08);
+}
 .topline{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.token-select{background:transparent;color:var(--text);border:0;font-size:18px;font-weight:bold;padding:0;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23848e9c' stroke-width='3'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 2px center;padding-right:20px}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px;font-size:11px}
-.stats-grid>div{text-align:center}
-.stats-grid span{color:var(--muted);display:block;margin-bottom:2px}
-.stats-grid b{color:var(--text);font-weight:600}
+.token-select{
+  background:linear-gradient(135deg,rgba(240,185,11,.14),rgba(240,185,11,.04));
+  color:var(--gold);
+  border:1px solid rgba(240,185,11,.4);
+  border-radius:8px;
+  font-size:15px;
+  font-weight:800;
+  padding:7px 26px 7px 12px;
+  cursor:pointer;
+  outline:none;
+  appearance:none;-webkit-appearance:none;
+  background-image:
+    linear-gradient(135deg,rgba(240,185,11,.14),rgba(240,185,11,.04)),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23f0b90b' stroke-width='3'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat,no-repeat;
+  background-position:0 0,right 8px center;
+  background-size:100% 100%,12px 12px;
+  letter-spacing:.5px;
+}
+.tag-demo{
+  color:var(--blue);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:3px 8px;
+  border:1px solid rgba(79,140,255,.35);
+  border-radius:6px;
+  background:rgba(79,140,255,.08);
+}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:11px;font-size:11px}
+.stats-grid>div{text-align:center;padding:7px 4px;background:rgba(255,255,255,.02);border-radius:8px;border:1px solid rgba(255,255,255,.04)}
+.stats-grid span{color:var(--muted);display:block;margin-bottom:3px;font-size:10px;letter-spacing:.3px}
+.stats-grid b{color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
 
 /* PRICE */
-.price-header{display:flex;align-items:baseline;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;margin-bottom:8px}
-.price-big{font-size:32px;font-weight:700;line-height:1;letter-spacing:-1px;transition:color .3s}
-.price-big.green{color:var(--green)}
-.price-big.red{color:var(--red)}
-.change{font-size:14px;font-weight:600}
-.change.up{color:var(--green)}
-.change.down{color:var(--red)}
+.price-header{
+  display:flex;align-items:baseline;gap:10px;
+  padding:14px 16px;
+  background:linear-gradient(155deg,#16223c,#0d1421);
+  border:1px solid var(--border2);
+  border-radius:12px;
+  margin-bottom:8px;
+  box-shadow:0 6px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(120,150,255,.06);
+  position:relative;
+  overflow:hidden;
+}
+.price-header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(240,185,11,.6),transparent);
+}
+.price-big{font-size:34px;font-weight:800;line-height:1;letter-spacing:-1.2px;transition:color .3s,text-shadow .3s;font-variant-numeric:tabular-nums}
+.price-big.green{color:var(--green);text-shadow:0 0 24px rgba(14,203,129,.5)}
+.price-big.red{color:var(--red);text-shadow:0 0 24px rgba(246,70,93,.5)}
+.change{font-size:14px;font-weight:700;padding:4px 8px;border-radius:6px;font-variant-numeric:tabular-nums}
+.change.up{color:var(--green);background:rgba(14,203,129,.12)}
+.change.down{color:var(--red);background:rgba(246,70,93,.12)}
 .price-label{margin-left:auto;color:var(--muted);font-size:11px}
+.price-label b{color:var(--gold)}
 
 /* CHART */
-.chart-card{padding:6px;margin-bottom:8px}
+.chart-card{padding:6px;margin-bottom:8px;position:relative}
+.chart-card::before{
+  content:'LIVE';position:absolute;top:10px;right:14px;
+  font-size:9px;font-weight:800;letter-spacing:1.2px;color:var(--green);
+  padding:2px 6px;border-radius:4px;background:rgba(14,203,129,.12);
+  border:1px solid rgba(14,203,129,.3);
+}
+.chart-card::after{
+  content:'';position:absolute;top:14px;right:6px;width:6px;height:6px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 8px var(--green);animation:pulseDot 1.4s infinite;
+}
+@keyframes pulseDot{0%,100%{opacity:.4}50%{opacity:1}}
 canvas#chart{display:block;width:100%;height:220px}
 
 /* ORDER BOOK */
-.ob-head{display:grid;grid-template-columns:1fr 1fr 1fr;padding:8px 12px;font-size:10px;color:var(--muted);border-bottom:1px solid var(--border);letter-spacing:.3px}
+.ob-head{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  padding:9px 12px;font-size:10px;color:var(--muted);
+  border-bottom:1px solid var(--border);
+  letter-spacing:.5px;font-weight:700;
+  background:rgba(255,255,255,.015);
+}
 .ob-head span:nth-child(2),.ob-head span:nth-child(3){text-align:right}
-.ob-body{padding:0 0}
-.ob-row{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;padding:3px 12px;font-size:11px;font-variant-numeric:tabular-nums;overflow:hidden}
-.ob-row .ob-bar{position:absolute;top:0;bottom:0;right:0;z-index:0;pointer-events:none;opacity:.22}
-.ob-bar.sell{background:var(--red)}
-.ob-bar.buy{background:var(--green)}
+.ob-row{position:relative;display:grid;grid-template-columns:1fr 1fr 1fr;padding:4px 12px;font-size:11px;font-variant-numeric:tabular-nums;overflow:hidden;cursor:pointer;transition:background .15s}
+.ob-row:hover{background:rgba(255,255,255,.03)}
+.ob-row .ob-bar{position:absolute;top:0;bottom:0;right:0;z-index:0;pointer-events:none;opacity:.18}
+.ob-bar.sell{background:linear-gradient(90deg,transparent,var(--red))}
+.ob-bar.buy{background:linear-gradient(90deg,transparent,var(--green))}
 .ob-row span{position:relative;z-index:1}
-.ob-row span:nth-child(2),.ob-row span:nth-child(3){text-align:right;color:var(--text)}
-.ob-price.red{color:var(--red)}
-.ob-price.green{color:var(--green)}
-.ob-mid{padding:7px 12px;text-align:center;font-size:18px;font-weight:bold;color:var(--text);background:rgba(255,255,255,.02);border-top:1px solid var(--border);border-bottom:1px solid var(--border);transition:color .3s}
-.ob-mid.up{color:var(--green)}
-.ob-mid.down{color:var(--red)}
+.ob-row span:nth-child(2){text-align:right;color:var(--text)}
+.ob-row span:nth-child(3){text-align:right;color:var(--muted)}
+.ob-price.red{color:var(--red);font-weight:600}
+.ob-price.green{color:var(--green);font-weight:600}
+.ob-mid{
+  padding:9px 12px;text-align:center;font-size:20px;font-weight:800;
+  color:var(--text);font-variant-numeric:tabular-nums;
+  background:linear-gradient(90deg,rgba(240,185,11,.06),rgba(79,140,255,.06));
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  transition:color .3s,text-shadow .3s;
+  letter-spacing:.5px;
+}
+.ob-mid.up{color:var(--green);text-shadow:0 0 18px rgba(14,203,129,.6)}
+.ob-mid.down{color:var(--red);text-shadow:0 0 18px rgba(246,70,93,.6)}
 
 /* FORM */
-.form-card{padding:12px}
+.form-card{padding:13px}
 .sides{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px}
-.side{padding:11px;border-radius:8px;border:0;font-size:13px;font-weight:600;cursor:pointer;background:#20242c;color:var(--muted);transition:.15s}
-.side.buy.active{background:var(--green);color:#0b0e11}
-.side.sell.active{background:var(--red);color:#fff}
-label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px;margin-top:8px}
-input[type=number]{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:#0d1014;color:var(--text);font-size:14px;outline:none;font-variant-numeric:tabular-nums}
-input[type=number]:focus{border-color:var(--gold)}
+.side{padding:12px;border-radius:10px;border:1px solid transparent;font-size:13px;font-weight:700;cursor:pointer;background:rgba(255,255,255,.03);color:var(--muted);transition:.18s;letter-spacing:.4px}
+.side.buy.active{background:linear-gradient(135deg,#0ecb81,#0a9d63);color:#04150c;box-shadow:0 4px 16px rgba(14,203,129,.4),inset 0 1px 0 rgba(255,255,255,.2)}
+.side.sell.active{background:linear-gradient(135deg,#f6465d,#c73548);color:#fff;box-shadow:0 4px 16px rgba(246,70,93,.4),inset 0 1px 0 rgba(255,255,255,.15)}
+label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px;margin-top:9px;font-weight:600;letter-spacing:.3px}
+input[type=number]{
+  width:100%;padding:11px 13px;border-radius:10px;
+  border:1px solid var(--border2);background:#080d18;
+  color:var(--text);font-size:14px;outline:none;
+  font-variant-numeric:tabular-nums;font-weight:600;
+  transition:border-color .15s,box-shadow .15s;
+}
+input[type=number]:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(240,185,11,.12)}
 input[type=range]{width:100%;margin:10px 0 4px;accent-color:var(--gold);height:5px}
 .quick{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:6px}
-.quick button{padding:7px 0;font-size:11px;background:#20242c;color:var(--muted);border:1px solid var(--border);border-radius:6px;cursor:pointer}
-.quick button:active{background:#2b3139}
-.prev{background:#0d1014;border:1px solid var(--border);border-radius:8px;padding:10px;margin-top:12px;font-size:12px}
-.prev>div{display:flex;justify-content:space-between;padding:2px 0}
-.prev b{color:var(--gold);font-variant-numeric:tabular-nums}
-.submit{width:100%;padding:14px;border-radius:8px;border:0;font-size:15px;font-weight:bold;cursor:pointer;margin-top:12px;background:var(--green);color:#0b0e11;transition:.15s}
-.submit.sell-mode{background:var(--red);color:#fff}
+.quick button{padding:8px 0;font-size:11px;background:rgba(255,255,255,.03);color:var(--muted);border:1px solid var(--border);border-radius:7px;cursor:pointer;font-weight:700;transition:.15s}
+.quick button:active{background:rgba(240,185,11,.15);color:var(--gold);border-color:rgba(240,185,11,.4)}
+.prev{
+  background:linear-gradient(155deg,rgba(240,185,11,.05),rgba(79,140,255,.03));
+  border:1px solid var(--border);border-radius:10px;
+  padding:11px 13px;margin-top:12px;font-size:12px;
+}
+.prev>div{display:flex;justify-content:space-between;padding:3px 0}
+.prev span{color:var(--muted)}
+.prev b{color:var(--gold);font-variant-numeric:tabular-nums;font-weight:700}
+.submit{
+  width:100%;padding:15px;border-radius:11px;border:0;
+  font-size:15px;font-weight:800;cursor:pointer;margin-top:12px;
+  background:linear-gradient(135deg,#0ecb81,#0a9d63);
+  color:#04150c;transition:.18s;letter-spacing:.5px;
+  box-shadow:0 6px 22px rgba(14,203,129,.35),inset 0 1px 0 rgba(255,255,255,.25);
+}
+.submit:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(14,203,129,.5),inset 0 1px 0 rgba(255,255,255,.25)}
+.submit.sell-mode{
+  background:linear-gradient(135deg,#f6465d,#c73548);
+  color:#fff;box-shadow:0 6px 22px rgba(246,70,93,.35),inset 0 1px 0 rgba(255,255,255,.15);
+}
+
+/* MY ORDERS */
+.my-title{
+  padding:11px 14px;font-size:11px;color:var(--gold);
+  letter-spacing:.7px;font-weight:800;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(90deg,rgba(240,185,11,.06),transparent);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.my-title .badge{
+  background:rgba(240,185,11,.15);color:var(--gold);
+  font-size:10px;padding:2px 7px;border-radius:5px;font-weight:800;
+}
+.my-orders-list{padding:6px 0;min-height:60px}
+.my-order{
+  display:grid;grid-template-columns:70px 1fr 1fr 1fr 30px;
+  gap:6px;padding:9px 14px;font-size:11px;
+  align-items:center;border-bottom:1px solid rgba(42,53,82,.5);
+  font-variant-numeric:tabular-nums;transition:background .15s;
+}
+.my-order:last-child{border:0}
+.my-order:hover{background:rgba(255,255,255,.02)}
+.my-order .side-tag{
+  padding:3px 7px;border-radius:5px;font-weight:800;font-size:10px;
+  text-align:center;letter-spacing:.4px;
+}
+.my-order .side-tag.buy{background:rgba(14,203,129,.14);color:var(--green);border:1px solid rgba(14,203,129,.3)}
+.my-order .side-tag.sell{background:rgba(246,70,93,.14);color:var(--red);border:1px solid rgba(246,70,93,.3)}
+.my-order .cell{color:var(--text)}
+.my-order .cell.muted{color:var(--muted)}
+.my-order .x{
+  background:rgba(246,70,93,.12);color:var(--red);border:1px solid rgba(246,70,93,.3);
+  width:24px;height:24px;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  font-size:12px;padding:0;transition:.15s;
+}
+.my-order .x:hover{background:var(--red);color:#fff;transform:rotate(90deg)}
+.empty-my{padding:24px 14px;text-align:center;color:var(--muted);font-size:11px}
 
 /* LOG */
-.log-title{padding:10px 12px;font-size:11px;color:var(--muted);letter-spacing:.5px;border-bottom:1px solid var(--border)}
-.log{max-height:200px;overflow-y:auto}
-.log-row{display:grid;grid-template-columns:1fr 1fr 1fr;padding:4px 12px;font-size:11px;font-variant-numeric:tabular-nums;border-bottom:1px solid rgba(43,49,57,.5)}
-.log-row.buy span:first-child{color:var(--green)}
-.log-row.sell span:first-child{color:var(--red)}
-.log-row span:nth-child(2),.log-row span:nth-child(3){text-align:right;color:var(--muted)}
+.log-title{
+  padding:11px 14px;font-size:11px;color:var(--muted);
+  letter-spacing:.7px;font-weight:800;
+  border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.015);
+}
+.log{max-height:180px;overflow-y:auto}
+.log-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  padding:5px 14px;font-size:11px;
+  font-variant-numeric:tabular-nums;
+  border-bottom:1px solid rgba(42,53,82,.4);
+}
+.log-row:last-child{border:0}
+.log-row.buy span:first-child{color:var(--green);font-weight:600}
+.log-row.sell span:first-child{color:var(--red);font-weight:600}
+.log-row span:nth-child(2){text-align:right;color:var(--muted)}
+.log-row span:nth-child(3){text-align:right;color:var(--muted)}
 
 /* TOAST */
-.toast{position:fixed;left:12px;right:12px;top:12px;z-index:4000;padding:11px;border-radius:8px;background:#1e2329;border:1px solid var(--border);text-align:center;font-size:12px;display:none}
+.toast{
+  position:fixed;left:12px;right:12px;top:12px;z-index:4000;
+  padding:12px;border-radius:10px;
+  background:linear-gradient(155deg,#1a2340,#0e1526);
+  border:1px solid var(--border2);text-align:center;font-size:12px;
+  font-weight:600;display:none;
+  box-shadow:0 8px 26px rgba(0,0,0,.6);
+}
 .toast.show{display:block;animation:fi .25s}
-.toast.ok{border-color:var(--green)}
-.toast.er{border-color:var(--red)}
+.toast.ok{border-color:rgba(14,203,129,.5);box-shadow:0 8px 26px rgba(14,203,129,.25)}
+.toast.er{border-color:rgba(246,70,93,.5);box-shadow:0 8px 26px rgba(246,70,93,.25)}
 @keyframes fi{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* Scroll */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 </style>
 </head>
 <body>
@@ -97,12 +285,12 @@ input[type=range]{width:100%;margin:10px 0 4px;accent-color:var(--gold);height:5
         <option value="AI">AI / USD</option>
         <option value="VK">VK / USD</option>
       </select>
-      <span style="color:var(--muted);font-size:11px">Спот • Демо</span>
+      <span class="tag-demo">SPOT • DEMO</span>
     </div>
     <div class="stats-grid">
-      <div><span>Макс 24ч</span><b id="statHigh">—</b></div>
-      <div><span>Мин 24ч</span><b id="statLow">—</b></div>
-      <div><span>Оборот 24ч</span><b id="statVol">—</b></div>
+      <div><span>МАКС 24Ч</span><b id="statHigh">—</b></div>
+      <div><span>МИН 24Ч</span><b id="statLow">—</b></div>
+      <div><span>ОБОРОТ 24Ч</span><b id="statVol">—</b></div>
     </div>
   </div>
 
@@ -121,9 +309,9 @@ input[type=range]{width:100%;margin:10px 0 4px;accent-color:var(--gold);height:5
   <!-- ORDER BOOK -->
   <div class="card">
     <div class="ob-head">
-      <span>Цена (USD)</span>
-      <span>Кол-во</span>
-      <span>Сумма (USD)</span>
+      <span>ЦЕНА (USD)</span>
+      <span>КОЛ-ВО</span>
+      <span>СУММА</span>
     </div>
     <div class="ob-body" id="obSells"></div>
     <div class="ob-mid" id="obMid">100.00</div>
@@ -158,9 +346,20 @@ input[type=range]{width:100%;margin:10px 0 4px;accent-color:var(--gold);height:5
     <button class="submit" id="submitBtn" onclick="submitOrder()">КУПИТЬ TG</button>
   </div>
 
+  <!-- MY ORDERS -->
+  <div class="card">
+    <div class="my-title">
+      <span>📌 МОИ ОРДЕРА</span>
+      <span class="badge" id="myCount">0</span>
+    </div>
+    <div class="my-orders-list" id="myOrdersList">
+      <div class="empty-my">Нет активных ордеров</div>
+    </div>
+  </div>
+
   <!-- LOG -->
   <div class="card">
-    <div class="log-title">ЛЕНТА СДЕЛОК</div>
+    <div class="log-title">⚡ ЛЕНТА СДЕЛОК</div>
     <div id="logList" class="log"><div style="padding:14px;text-align:center;color:var(--muted)">Ждём сделок…</div></div>
   </div>
 </div>
@@ -174,9 +373,13 @@ const TOKENS = {
 };
 const K_BUY  = 0.5;
 const K_SELL = 0.25;
-const CANDLE_PERIOD = 3000; // 3 сек = 1 свеча (демо-день)
+const CANDLE_PERIOD = 3000;
 const MAX_CANDLES   = 80;
 const BOT_NAMES = ['Вася','Петя','Иван','Маша','Олег','Коля','Аня','Дима','Катя','Саша','Лена','Гриша','Толя','Юля'];
+
+/* Cap размера бот-ордера в USD. Растёт со временем. */
+let botCap = 150;    // старт: до $150
+const BOT_CAP_MAX = 20000;
 
 /* ============ СОСТОЯНИЕ ============ */
 const S = {
@@ -287,7 +490,7 @@ function getAllCandles(token){
   return arr;
 }
 
-/* ============ БОТЫ ============ */
+/* ============ БОТЫ ($20 – $150+) ============ */
 function botOrder(token){
   const mid = S.price[token];
   const side = Math.random() < 0.5 ? 'buy' : 'sell';
@@ -297,9 +500,9 @@ function botOrder(token){
   const d = TOKENS[token].decimals;
   price = Math.round(price * Math.pow(10, d)) / Math.pow(10, d);
 
-  const supply = TOKENS[token].supply;
-  const share = 0.002 + Math.random() * 0.008;
-  const amount = Math.max(1, Math.floor(supply * share));
+  // Объём в USD: от $20 до botCap
+  const usd = 20 + Math.random() * (botCap - 20);
+  const amount = Math.max(1, Math.floor(usd / price));
 
   S.orders.push({
     id: uid(), side, price, amount, filled: 0, token,
@@ -310,7 +513,7 @@ function botOrder(token){
 
 function initBots(){
   for(const t of Object.keys(TOKENS)){
-    for(let i = 0; i < 8; i++) botOrder(t);
+    for(let i = 0; i < 10; i++) botOrder(t);
   }
 }
 
@@ -359,7 +562,7 @@ function matchAll(){
   return anyTrade;
 }
 
-/* ============ ГРАФИК (свечи) ============ */
+/* ============ ГРАФИК ============ */
 function drawChart(){
   const canvas = document.getElementById('chart');
   if(!canvas) return;
@@ -377,14 +580,7 @@ function drawChart(){
   const token = S.activeToken;
   const d = TOKENS[token].decimals;
   const candles = getAllCandles(token);
-
-  if(!candles.length){
-    ctx.fillStyle = '#848e9c';
-    ctx.font = '12px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('Ждём данных…', W/2, H/2);
-    return;
-  }
+  if(!candles.length) return;
 
   const N = Math.min(50, candles.length);
   const visible = candles.slice(-N);
@@ -395,12 +591,12 @@ function drawChart(){
   min -= pad; max += pad;
   const range = max - min || 1;
 
-  const padTop = 8, padBottom = 20, padRight = 52, padLeft = 4;
+  const padTop = 8, padBottom = 20, padRight = 54, padLeft = 4;
   const plotW = W - padRight - padLeft;
   const plotH = H - padTop - padBottom;
 
-  // Сетка
-  ctx.strokeStyle = '#1e2329';
+  // Сетка + метки цены
+  ctx.strokeStyle = 'rgba(42,53,82,.6)';
   ctx.lineWidth = 1;
   for(let i = 0; i <= 4; i++){
     const y = padTop + (plotH / 4) * i;
@@ -408,15 +604,13 @@ function drawChart(){
     ctx.moveTo(padLeft, y);
     ctx.lineTo(padLeft + plotW, y);
     ctx.stroke();
-    // метка
     const priceAt = max - (range / 4) * i;
     ctx.fillStyle = '#5e6673';
     ctx.font = '9px sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText(fmt(priceAt, d), padLeft + plotW + 4, y + 3);
+    ctx.fillText(fmt(priceAt, d), padLeft + plotW + 5, y + 3);
   }
 
-  // Свечи
   const cw = plotW / N;
   const bodyW = Math.max(1.5, cw * 0.7);
 
@@ -426,29 +620,25 @@ function drawChart(){
     const yL = padTop + ((max - c.l) / range) * plotH;
     const yO = padTop + ((max - c.o) / range) * plotH;
     const yC = padTop + ((max - c.c) / range) * plotH;
-
     const isGreen = c.c >= c.o;
     const color = isGreen ? '#0ecb81' : '#f6465d';
     ctx.strokeStyle = color;
     ctx.fillStyle   = color;
-
-    // фитиль
     ctx.beginPath();
     ctx.moveTo(x, yH);
     ctx.lineTo(x, yL);
     ctx.lineWidth = 1;
     ctx.stroke();
-
-    // тело
     const top = Math.min(yO, yC);
     const h = Math.max(1.5, Math.abs(yC - yO));
     ctx.fillRect(x - bodyW/2, top, bodyW, h);
   });
 
-  // Текущая цена
+  // Текущая цена — пунктир + плашка
   const last = visible[visible.length - 1];
   const yLast = padTop + ((max - last.c) / range) * plotH;
-  ctx.strokeStyle = last.c >= last.o ? '#0ecb81' : '#f6465d';
+  const cColor = last.c >= last.o ? '#0ecb81' : '#f6465d';
+  ctx.strokeStyle = cColor;
   ctx.setLineDash([3, 3]);
   ctx.beginPath();
   ctx.moveTo(padLeft, yLast);
@@ -456,10 +646,9 @@ function drawChart(){
   ctx.stroke();
   ctx.setLineDash([]);
 
-  // Плашка цены справа
   const yBox = Math.max(padTop, Math.min(H - padBottom - 16, yLast - 8));
-  ctx.fillStyle = last.c >= last.o ? '#0ecb81' : '#f6465d';
-  ctx.fillRect(padLeft + plotW + 2, yBox, padRight - 4, 16);
+  ctx.fillStyle = cColor;
+  ctx.fillRect(padLeft + plotW + 3, yBox, padRight - 6, 16);
   ctx.fillStyle = '#0b0e11';
   ctx.font = 'bold 10px sans-serif';
   ctx.textAlign = 'center';
@@ -467,6 +656,8 @@ function drawChart(){
 }
 
 /* ============ РЕНДЕР СТАКАНА ============ */
+let lastRenderPrice = null;
+
 function renderOrderBook(){
   const token = S.activeToken;
   const d = TOKENS[token].decimals;
@@ -491,7 +682,6 @@ function renderOrderBook(){
     buysOut.length  ? buysOut[buysOut.length-1].cum  : 1
   ) || 1;
 
-  // SELLS: ближе к рынку внизу списка (близко к средней цене)
   const sellsHtml = sellsOut.slice().reverse().map(o => `
     <div class="ob-row">
       <div class="ob-bar sell" style="width:${(o.cum/maxCum)*100}%"></div>
@@ -519,7 +709,6 @@ function renderOrderBook(){
   else midEl.className = 'ob-mid';
   lastRenderPrice = cur;
 }
-let lastRenderPrice = null;
 
 /* ============ РЕНДЕР HEADER ============ */
 function renderHeader(){
@@ -542,6 +731,37 @@ function renderHeader(){
   document.getElementById('statHigh').textContent = fmt(S.high24[token], d);
   document.getElementById('statLow').textContent  = fmt(S.low24[token], d);
   document.getElementById('statVol').textContent  = fmtUSD(S.vol24[token]);
+}
+
+/* ============ МОИ ОРДЕРА ============ */
+function renderMyOrders(){
+  const token = S.activeToken;
+  const d = TOKENS[token].decimals;
+  const eps = 1e-9;
+  const mine = S.orders
+    .filter(o => o.mine && o.token === token && o.filled < o.amount - eps)
+    .sort((a,b) => b.ts - a.ts);
+
+  document.getElementById('myCount').textContent = mine.length;
+  const box = document.getElementById('myOrdersList');
+
+  if(!mine.length){
+    box.innerHTML = '<div class="empty-my">Нет активных ордеров</div>';
+    return;
+  }
+
+  box.innerHTML = mine.map(o => {
+    const rem = o.amount - o.filled;
+    const usd = rem * o.price;
+    return `
+      <div class="my-order">
+        <span class="side-tag ${o.side}">${o.side === 'buy' ? 'КУПИТЬ' : 'ПРОДАТЬ'}</span>
+        <span class="cell">${fmt(o.price, d)}</span>
+        <span class="cell muted">${fmtBig(rem)}</span>
+        <span class="cell">${fmt(usd, 2)}$</span>
+        <span class="x" onclick="cancelOrder('${o.id}')">✕</span>
+      </div>`;
+  }).join('');
 }
 
 /* ============ РЕНДЕР ЛОГА ============ */
@@ -598,7 +818,6 @@ function computeOrder(){
 }
 function updatePreview(){
   const { amount, usd } = computeOrder();
-  const d = TOKENS[S.activeToken].decimals;
   document.getElementById('prevAmt').textContent = fmtBig(amount) + ' ' + S.activeToken;
   document.getElementById('prevSum').textContent = fmt(usd, 2) + ' USD';
 }
@@ -627,6 +846,15 @@ function submitOrder(){
   renderAll();
 }
 
+function cancelOrder(id){
+  const i = S.orders.findIndex(o => o.id === id && o.mine);
+  if(i < 0) return;
+  const o = S.orders[i];
+  S.orders.splice(i, 1);
+  toast('✕ Ордер отменён');
+  renderAll();
+}
+
 /* ============ ЦИКЛЫ ============ */
 function botTick(){
   const tokens = Object.keys(TOKENS);
@@ -637,9 +865,13 @@ function matchTick(){
   const did = matchAll();
   if(did) renderAll();
 }
+function growBotCap(){
+  if(botCap < BOT_CAP_MAX) botCap *= 1.02;
+}
 function renderAll(){
   renderHeader();
   renderOrderBook();
+  renderMyOrders();
   drawChart();
 }
 
@@ -649,10 +881,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initBots();
   matchAll();
 
-  // стартовый ордер в форме
   document.getElementById('ordPrice').value = fmt(S.price[S.activeToken], TOKENS[S.activeToken].decimals);
 
-  // обработчики
   document.getElementById('pctSlider').addEventListener('input', e => {
     S.pct = parseInt(e.target.value) || 1;
     document.getElementById('pctLabel').textContent = S.pct + '%';
@@ -665,7 +895,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAll();
   renderLog();
 
-  // автоподстройка цены в поле, если не редактируется
   setInterval(() => {
     const inp = document.getElementById('ordPrice');
     if(document.activeElement !== inp){
@@ -676,7 +905,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setInterval(botTick, 1200);
   setInterval(matchTick, 500);
-  setInterval(() => { if(!S.currentCandle[S.activeToken]) renderAll(); else renderAll(); }, 3000);
+  setInterval(growBotCap, 10000);
+  setInterval(renderAll, 3000);
   window.addEventListener('resize', drawChart);
 });
 </script>
