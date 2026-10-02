@@ -30,6 +30,7 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
 .price-big.down{color:#ff647c;text-shadow:0 0 20px #ff647c88}
 .price-unit{color:#8f9bab;font-size:14px}
 .price-meta{display:flex;justify-content:space-between;font-size:11px;padding:0 4px;margin-bottom:8px}
+.supply-info{text-align:center;font-size:10px;color:#7f8c9f;margin-bottom:6px}
 #chart{display:block;width:100%;height:120px;border-radius:10px;background:#0d1520;border:1px solid #2d3a4c}
 .bal-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .bal{background:#0d1520;border:1px solid #2d3a4c;border-radius:11px;padding:10px}
@@ -46,6 +47,8 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
 .preview{background:#0d1520;border:1px solid #303d50;border-radius:11px;padding:10px;margin:10px 0;font-size:12px}
 .preview>div{display:flex;justify-content:space-between;padding:3px 0}
 .preview b{color:#f4cf70;font-size:14px}
+.impact{margin-top:6px;padding-top:6px;border-top:1px solid #1a2534;font-size:11px;color:#8f9bab}
+.impact b{color:#f4cf70}
 .book-head{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:5px}
 .bh{font-size:11px;font-weight:bold;letter-spacing:.5px;padding:5px;border-radius:7px;text-align:center}
 .bh.sell{background:#4a1f2f;color:#ff647c}
@@ -75,7 +78,7 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
 
 <div class="app">
   <h1>💱 P2P АВТОМАТИЗАЦИЯ</h1>
-  <div class="sub">ДЕМО • Живой рынок • Курс растёт от покупок</div>
+  <div class="sub">ДЕМО • Курс растёт от объёма × запас</div>
 
   <div class="card gold">
     <div class="title">📈 КУРС</div>
@@ -92,16 +95,17 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
       <span id="startChange" class="info">от старта: 0%</span>
       <span id="earnedInfo" class="ok">💵 0.00 T</span>
     </div>
+    <div class="supply-info" id="supplyInfo">Запас: 1 000 TG • 1% = +0.5% цены</div>
     <canvas id="chart" height="120"></canvas>
   </div>
 
   <div class="card">
     <div class="title">💰 БАЛАНС</div>
     <div class="bal-grid">
-      <div class="bal"><span>🥇 TG</span><b id="balTG">10</b></div>
-      <div class="bal"><span>🤖 AI</span><b id="balAI">50K</b></div>
-      <div class="bal"><span>🎮 VK</span><b id="balVK">500</b></div>
-      <div class="bal gold"><span>💵 TUSD</span><b id="balTUSD">5000.00</b></div>
+      <div class="bal"><span>🥇 TG</span><b id="balTG">500</b></div>
+      <div class="bal"><span>🤖 AI</span><b id="balAI">100K</b></div>
+      <div class="bal"><span>🎮 VK</span><b id="balVK">1M</b></div>
+      <div class="bal gold"><span>💵 TUSD</span><b id="balTUSD">10000.00</b></div>
     </div>
   </div>
 
@@ -125,6 +129,10 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
     <div class="preview">
       <div><span>Кол-во:</span><b id="ordAmountDisp">—</b></div>
       <div><span>Сумма:</span><b id="ordTotalDisp">—</b></div>
+      <div class="impact">
+        Прогноз влияния на курс: <b id="impactDisp">0.00%</b><br>
+        <span id="impactHint">(если ордер сработает полностью)</span>
+      </div>
     </div>
     <button class="ok" onclick="submitOrder()">🚀 РАЗМЕСТИТЬ ОРДЕР</button>
   </div>
@@ -150,20 +158,23 @@ label{display:block;color:#aeb8c6;font-size:11px;margin-bottom:5px;margin-top:8p
 <script>
 /* ================= КОНФИГ ================= */
 const TOKENS = {
-  TG: { decimals: 2, start: 100 },
-  AI: { decimals: 4, start: 0.01 },
-  VK: { decimals: 2, start: 2 },
+  TG: { decimals: 2, start: 100,    supply: 1_000 },
+  AI: { decimals: 4, start: 0.01,   supply: 10_000_000 },
+  VK: { decimals: 3, start: 0.5,    supply: 800_000_000 },
 };
+
+/* Коэффициенты влияния на цену */
+const K_BUY  = 0.5;   // покупка 1% запаса → +0.5%
+const K_SELL = 0.25;  // продажа 1% запаса → -0.25%
+
 const BOT_NAMES = ['Вася','Петя','Иван','Маша','Олег','Коля','Аня','Дима','Катя','Саша','Лена','Гриша','Толя','Юля'];
-const PRICE_UP = 1.01;
-const PRICE_DOWN = 0.995;
 
 /* ================= СОСТОЯНИЕ ================= */
 const S = {
-  price: { TG: 100, AI: 0.01, VK: 2 },
-  startPrice: { TG: 100, AI: 0.01, VK: 2 },
-  history: { TG: [100], AI: [0.01], VK: [2] },
-  bal: { TG: 10, AI: 50000, VK: 500, TUSD: 5000 },
+  price: { TG: 100, AI: 0.01, VK: 0.5 },
+  startPrice: { TG: 100, AI: 0.01, VK: 0.5 },
+  history: { TG: [100], AI: [0.01], VK: [0.5] },
+  bal: { TG: 500, AI: 100000, VK: 1000000, TUSD: 10000 },
   orders: [],
   log: [],
   activeToken: 'TG',
@@ -177,10 +188,12 @@ function uid(){ return 'o' + Math.random().toString(36).slice(2,10); }
 function fmt(v, d=2){ return Number(v).toFixed(d); }
 function fmtBig(v){
   const n = Number(v);
+  if(n >= 1e9) return (n/1e9).toFixed(2).replace(/\.?0+$/,'') + 'B';
   if(n >= 1e6) return (n/1e6).toFixed(2).replace(/\.?0+$/,'') + 'M';
   if(n >= 1e3) return (n/1e3).toFixed(1).replace(/\.?0+$/,'') + 'K';
   return String(Math.round(n*10000)/10000);
 }
+function fmtInt(v){ return Number(v).toLocaleString('ru-RU'); }
 function toast(t, ok=false){
   const el = document.getElementById('toast');
   el.textContent = t;
@@ -196,20 +209,40 @@ function pushLog(txt){
   renderLog();
 }
 
+/* ================= ЦЕНА (ОТ ОБЪЁМА) ================= */
+function applyPriceImpact(token, side, volume){
+  const supply = TOKENS[token].supply;
+  const ratio  = volume / supply;
+  const impact = ratio * (side === 'buy' ? K_BUY : -K_SELL);
+  const oldP = S.price[token];
+  S.price[token] = oldP * (1 + impact);
+  S.history[token].push(S.price[token]);
+  if(S.history[token].length > 80) S.history[token].shift();
+
+  if(token === S.activeToken){
+    const el = document.getElementById('priceBig');
+    el.classList.remove('up','down');
+    el.classList.add(impact > 0 ? 'up' : 'down');
+    setTimeout(() => el.classList.remove('up','down'), 700);
+  }
+  return impact;
+}
+
 /* ================= БОТЫ ================= */
 function botOrder(token){
   const mid = S.price[token];
   const side = Math.random() < 0.5 ? 'buy' : 'sell';
   let price;
-  if(side === 'sell') price = mid * (1.01 + Math.random() * 0.03);
-  else                price = mid * (0.97 + Math.random() * 0.02);
-  if(Math.random() < 0.15) price = mid * (1 + (Math.random() - 0.5) * 0.008);
+  if(side === 'sell') price = mid * (1.005 + Math.random() * 0.03);
+  else                price = mid * (0.965 + Math.random() * 0.025);
 
   const d = TOKENS[token].decimals;
   price = Math.round(price * Math.pow(10, d)) / Math.pow(10, d);
 
-  const maxVol = token === 'AI' ? 5000 : (token === 'VK' ? 100 : 20);
-  const amount = 1 + Math.floor(Math.random() * maxVol);
+  // Боты торгуют объёмами, сопоставимыми с запасом
+  const supply = TOKENS[token].supply;
+  const supplyShare = 0.002 + Math.random() * 0.01; // 0.2% – 1.2% запаса
+  const amount = Math.max(1, Math.floor(supply * supplyShare));
 
   S.orders.push({
     id: uid(), side, price, amount, filled: 0, token,
@@ -230,7 +263,7 @@ function matchAll(){
   const eps = 1e-9;
 
   for(const token of Object.keys(TOKENS)){
-    let safety = 200;
+    let safety = 300;
     while(safety-- > 0){
       const sells = S.orders.filter(o => o.token === token && o.side === 'sell' && o.filled < o.amount - eps)
                             .sort((a,b) => a.price - b.price || a.ts - b.ts);
@@ -251,10 +284,17 @@ function matchAll(){
 
       S.earned += usd * 0.01;
 
+      // === ВЛИЯНИЕ НА ЦЕНУ ===
+      // Определяем "агрессора": у кого ts больше, тот "активный"
+      const aggressorSide = s.ts > b.ts ? 'sell' : 'buy';
+      const impact = applyPriceImpact(token, aggressorSide, vol);
+
       s.filled += vol;
       b.filled += vol;
 
-      pushLog(`💥 ${s.mine?'🧑':'🤖'}${s.owner} → ${b.mine?'🧑':'🤖'}${b.owner}: ${fmtBig(vol)} ${token} × ${fmt(dealPrice, TOKENS[token].decimals)} = ${fmt(usd,2)} T`);
+      const impactStr = (impact*100 >= 0 ? '+' : '') + (impact*100).toFixed(3) + '%';
+      const impactColor = impact >= 0 ? '🟢' : '🔴';
+      pushLog(`💥 ${s.mine?'🧑':'🤖'}${s.owner} → ${b.mine?'🧑':'🤖'}${b.owner}: ${fmtBig(vol)} ${token} × ${fmt(dealPrice, TOKENS[token].decimals)} = ${fmt(usd,2)} T ${impactColor} ${impactStr}`);
       anyTrade = true;
     }
   }
@@ -263,20 +303,6 @@ function matchAll(){
   if(S.orders.length > 300) S.orders = S.orders.slice(-300);
 
   return anyTrade;
-}
-
-/* ================= ЦЕНА ================= */
-function bumpPrice(token, mult){
-  S.price[token] *= mult;
-  S.history[token].push(S.price[token]);
-  if(S.history[token].length > 60) S.history[token].shift();
-
-  if(token === S.activeToken){
-    const el = document.getElementById('priceBig');
-    el.classList.remove('up','down');
-    el.classList.add(mult > 1 ? 'up' : 'down');
-    setTimeout(() => el.classList.remove('up','down'), 800);
-  }
 }
 
 /* ================= ГРАФИК ================= */
@@ -320,10 +346,7 @@ function drawChart(){
   ctx.lineWidth = 1;
   ctx.setLineDash([2,4]);
   [min, (min+max)/2, max].forEach(v => {
-    ctx.beginPath();
-    ctx.moveTo(padL, Y(v));
-    ctx.lineTo(W - padR, Y(v));
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(padL, Y(v)); ctx.lineTo(W - padR, Y(v)); ctx.stroke();
   });
   ctx.setLineDash([]);
 
@@ -351,14 +374,10 @@ function drawChart(){
   ctx.stroke();
 
   const lx = X(data.length-1), ly = Y(data[data.length-1]);
-  ctx.beginPath();
-  ctx.arc(lx, ly, 5, 0, Math.PI*2);
-  ctx.fillStyle = color + '55';
-  ctx.fill();
-  ctx.beginPath();
-  ctx.arc(lx, ly, 2.5, 0, Math.PI*2);
-  ctx.fillStyle = color;
-  ctx.fill();
+  ctx.beginPath(); ctx.arc(lx, ly, 5, 0, Math.PI*2);
+  ctx.fillStyle = color + '55'; ctx.fill();
+  ctx.beginPath(); ctx.arc(lx, ly, 2.5, 0, Math.PI*2);
+  ctx.fillStyle = color; ctx.fill();
 
   ctx.fillStyle = '#7f8c9f';
   ctx.font = '9px Arial';
@@ -376,8 +395,8 @@ function renderTop(){
   document.getElementById('balVK').textContent = fmtBig(S.bal.VK);
   document.getElementById('balTUSD').textContent = fmt(S.bal.TUSD, 2);
 
-  document.getElementById('tokenLabel').textContent = TOKENS[S.activeToken] ? '' : '';
-  document.getElementById('tokenLabel').textContent = document.querySelector(`.tab[data-token="${S.activeToken}"]`).textContent;
+  const tabEl = document.querySelector(`.tab[data-token="${S.activeToken}"]`);
+  document.getElementById('tokenLabel').textContent = tabEl ? tabEl.textContent : S.activeToken;
   document.getElementById('unitLabel').textContent = S.activeToken;
   document.getElementById('priceBig').textContent = fmt(S.price[S.activeToken], TOKENS[S.activeToken].decimals);
 
@@ -387,6 +406,10 @@ function renderTop(){
   chgEl.className = chg >= 0 ? 'ok' : 'er';
 
   document.getElementById('earnedInfo').textContent = `💵 ${fmt(S.earned, 2)} T`;
+
+  const supply = TOKENS[S.activeToken].supply;
+  document.getElementById('supplyInfo').textContent =
+    `Запас: ${fmtInt(supply)} ${S.activeToken} • 1% = +${K_BUY*1}% цены`;
 
   document.querySelectorAll('.tab').forEach(t => {
     t.classList.toggle('active', t.dataset.token === S.activeToken);
@@ -436,54 +459,52 @@ function renderLog(){
   el.innerHTML = S.log.map(l => `<div class="log-line"><span class="tm">[${l.t}]</span><span style="flex:1;text-align:right">${l.txt}</span></div>`).join('');
 }
 
-function renderAll(){
-  renderTop();
-  renderBook();
-}
+function renderAll(){ renderTop(); renderBook(); }
 
 /* ================= ФОРМА ================= */
 function setToken(t){
   S.activeToken = t;
-  const inp = document.getElementById('ordPrice');
-  inp.value = fmt(S.price[t], TOKENS[t].decimals);
+  document.getElementById('ordPrice').value = fmt(S.price[t], TOKENS[t].decimals);
   renderTop();
   renderBook();
 }
-
 function setSide(s){
   S.side = s;
   document.getElementById('btnBuy').classList.toggle('active', s === 'buy');
   document.getElementById('btnSell').classList.toggle('active', s === 'sell');
   updatePreview();
 }
-
 function setPct(p){
   S.pct = Math.max(1, Math.min(100, p));
   renderTop();
 }
-
 function computeOrder(){
   const token = S.activeToken;
   const price = parseFloat(document.getElementById('ordPrice').value) || S.price[token];
   const pct = S.pct / 100;
-
   if(S.side === 'buy'){
-    const availUSD = S.bal.TUSD;
-    const usd = availUSD * pct;
+    const usd = S.bal.TUSD * pct;
     const amount = usd / price;
     return { token, price, amount, usd };
   } else {
-    const availTok = S.bal[token];
-    const amount = availTok * pct;
+    const amount = S.bal[token] * pct;
     const usd = amount * price;
     return { token, price, amount, usd };
   }
 }
-
 function updatePreview(){
   const { token, amount, usd } = computeOrder();
   document.getElementById('ordAmountDisp').textContent = fmtBig(amount) + ' ' + token;
   document.getElementById('ordTotalDisp').textContent = fmt(usd, 2) + ' TUSD';
+
+  const supply = TOKENS[token].supply;
+  const ratio = amount / supply;
+  const impact = ratio * (S.side === 'buy' ? K_BUY : -K_SELL);
+  const impactPct = impact * 100;
+  const el = document.getElementById('impactDisp');
+  const sign = impactPct >= 0 ? '+' : '';
+  el.textContent = sign + impactPct.toFixed(3) + '%';
+  el.style.color = impactPct >= 0 ? '#39d98a' : '#ff647c';
 }
 
 /* ================= ОРДЕР ================= */
@@ -499,28 +520,18 @@ function submitOrder(){
   if(S.side === 'buy'){
     if(usd > S.bal.TUSD + 1e-6){ toast(`Мало TUSD: нужно ${fmt(usd,2)}`); return; }
   } else {
-    if(amount > S.bal[token] + 1e-6){ toast(`Мало ${token}: нужно ${fmt(amount, 4)}`); return; }
+    if(amount > S.bal[token] + 1e-6){ toast(`Мало ${token}: нужно ${fmtBig(amount)}`); return; }
   }
 
-  const ord = {
+  S.orders.push({
     id: uid(), side: S.side, price, amount, filled: 0, token,
     owner: 'вы', mine: true, ts: Date.now(),
-  };
-  S.orders.push(ord);
-
-  matchAll();
-  const didFill = ord.filled > 1e-9;
-
-  if(didFill){
-    bumpPrice(token, S.side === 'buy' ? PRICE_UP : PRICE_DOWN);
-    toast(S.side === 'buy' ? `🟩 Куплено • курс +1%` : `🟥 Продано • курс −0.5%`, true);
-  } else {
-    toast('📝 Ордер в книге — ждёт встречный');
-  }
+  });
 
   pushLog(`📝 Вы: ${S.side === 'buy' ? '🟩 покупка' : '🟥 продажа'} ${fmtBig(amount)} ${token} × ${fmt(price, TOKENS[token].decimals)}`);
-
+  toast('🚀 Ордер размещён', true);
   renderAll();
+  setTimeout(matchAll, 50);
 }
 
 function cancelOrder(id){
@@ -528,7 +539,7 @@ function cancelOrder(id){
   if(i < 0) return;
   const o = S.orders[i];
   S.orders.splice(i, 1);
-  pushLog(`✕ Отменён: ${fmtBig(o.amount - o.filled)} ${o.token} × ${fmt(o.price, TOKENS[o.token].decimals)}`);
+  pushLog(`✕ Отменён: ${fmtBig(o.amount - o.filled)} ${o.token}`);
   renderAll();
 }
 
@@ -536,13 +547,12 @@ function cancelOrder(id){
 function botTick(){
   const tokens = Object.keys(TOKENS);
   botOrder(tokens[Math.floor(Math.random()*tokens.length)]);
-  if(Math.random() < 0.5) botOrder(tokens[Math.floor(Math.random()*tokens.length)]);
+  if(Math.random() < 0.6) botOrder(tokens[Math.floor(Math.random()*tokens.length)]);
   renderBook();
 }
-
 function matchTick(){
-  const didMatch = matchAll();
-  if(didMatch) renderAll();
+  const did = matchAll();
+  if(did) renderAll();
 }
 
 /* ================= ИНИТ ================= */
@@ -550,9 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBots();
   matchAll();
 
-  document.querySelectorAll('.tab').forEach(t => {
-    t.onclick = () => setToken(t.dataset.token);
-  });
+  document.querySelectorAll('.tab').forEach(t => { t.onclick = () => setToken(t.dataset.token); });
   document.getElementById('pctSlider').addEventListener('input', e => {
     S.pct = parseInt(e.target.value) || 1;
     document.getElementById('pctLabel').textContent = S.pct + '%';
